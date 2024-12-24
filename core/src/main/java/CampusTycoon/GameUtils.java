@@ -3,6 +3,7 @@ package CampusTycoon;
 import java.util.Arrays;
 import java.util.List;
 
+import CampusTycoon.GameLogic.Events.StrikeEvent;
 import CampusTycoon.GameLogic.Map;
 import CampusTycoon.GameLogic.SatisfactionMeter;
 import CampusTycoon.UI.Camera;
@@ -14,7 +15,7 @@ import CampusTycoon.UI.Components.Backdrop;
 import CampusTycoon.UI.Components.Button;
 import CampusTycoon.UI.Components.MenuText;
 import CampusTycoon.GameLogic.BuildingCounter;
-import CampusTycoon.GameLogic.Event;
+import CampusTycoon.GameLogic.Events.Event;
 import CampusTycoon.GameLogic.Buildings.*;
 import CampusTycoon.GameLogic.Timer;
 
@@ -30,6 +31,8 @@ public class GameUtils {
 	// Gets the image used for hover displays (just a semi-transparent version of
 	// the original)
 	public static String getHoverImagePath(String originalImage) {
+
+
 		switch (originalImage) {
 			case Accommodation.defaultImage:
 				// e.g. "Accommodation.png" -> "AccommodationTransparent.png"
@@ -159,7 +162,7 @@ public class GameUtils {
 //		notif2.setAnchor(Anchor.TopLeft);
 
 
-		//Event ev = new Event();
+		//currentEvent = new StrikeEvent();
 
 		Button buttonSatisfaction = new Button("Satisfaction.png", 100, 10, 200, 66);
 		buttonSatisfaction.setAnchor(Anchor.TopRight);
@@ -217,6 +220,51 @@ public class GameUtils {
 //        Drawer.add(1, resumeGame);
 //    }
 
+
+
+
+    //(Assessment 2) This will tell the user the effects of their choice
+    public static void EventResultPopup(){
+        Timer.isRunning = false;
+
+
+        Backdrop eventScreenBackdrop = new Backdrop("Backdrop.png", 0, 30, 400, 350);
+        eventScreenBackdrop.setAnchor(Anchor.Centre);
+        eventScreenBackdrop.update();
+        currentEvent.eventUI.elements.add(eventScreenBackdrop);
+        Drawer.add(1, eventScreenBackdrop); // Layer 1 so its behind the rest of the UI
+
+
+        Button buttonAccept = new Button("Accept.png", 0, -100, 126, 66);
+        buttonAccept.setClickAction(Actions.EndEvent);
+        buttonAccept.setAnchor(Anchor.Centre);
+        buttonAccept.value = 1; // Used so the Event class knows which button was clicked
+
+
+
+        buttonAccept.update();
+        currentEvent.eventUI.elements.add(buttonAccept);
+        Drawer.add(2, buttonAccept);
+
+        InputHandler.add(buttonAccept);
+        List<Component> eventChoices = Arrays.asList(buttonAccept);
+
+        currentEvent.eventUI.buttonElements = eventChoices;
+
+
+
+        MenuText testText = new MenuText(
+            currentEvent.resultText,
+            -eventScreenBackdrop.getBaseWidth() / 2 + eventScreenBackdrop.getBaseX() + 15,
+            eventScreenBackdrop.getBaseHeight() / 2 + eventScreenBackdrop.getBaseY() - 12,
+            1.5f, 1.5f);
+        testText.setAnchor(Anchor.Centre);
+        testText.update();
+        currentEvent.eventUI.elements.add(testText);
+        Drawer.add(2, testText);
+
+    }
+
 	public static void createEventPopupUI(Event event) {
 		Backdrop eventScreenBackdrop = new Backdrop("Backdrop.png", 0, 30, 400, 350);
 		eventScreenBackdrop.setAnchor(Anchor.Centre);
@@ -224,24 +272,24 @@ public class GameUtils {
 		event.eventUI.elements.add(eventScreenBackdrop);
 		Drawer.add(1, eventScreenBackdrop); // Layer 1 so its behind the rest of the UI
 
-		Button buttonAccept = new Button("Accept.png", -130, -106, 126, 66);
+		Button buttonAccept = new Button("Accept.png", -110, -100, 126, 66);
 		buttonAccept.setClickAction(Actions.ChooseEventOption);
 		buttonAccept.setAnchor(Anchor.Centre);
 		buttonAccept.value = 1; // Used so the Event class knows which button was clicked
 
-		Button buttonNeutral = new Button("Neutral.png", 0, -106, 126, 66);
+		/*Button buttonNeutral = new Button("Neutral.png", 0, -106, 126, 66);
 		buttonNeutral.setClickAction(Actions.ChooseEventOption);
 		buttonNeutral.setAnchor(Anchor.Centre);
-		buttonNeutral.value = 2;
+		buttonNeutral.value = 2;*/
 
-		Button buttonReject = new Button("Reject.png", 130, -106, 126, 66);
+		Button buttonReject = new Button("Reject.png", 110, -100, 126, 66);
 		buttonReject.setClickAction(Actions.ChooseEventOption);
 		buttonReject.setAnchor(Anchor.Centre);
-		buttonReject.value = 3;
+		buttonReject.value = 2;
 
 
 
-		List<Component> eventChoices = Arrays.asList(buttonAccept, buttonReject, buttonNeutral);
+		List<Component> eventChoices = Arrays.asList(buttonAccept, buttonReject);
 
 		for (Component button : eventChoices) {
 			// All added to layer '2' (on top of almost all other UI elements)

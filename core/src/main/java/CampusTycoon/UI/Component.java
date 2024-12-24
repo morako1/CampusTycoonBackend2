@@ -26,6 +26,7 @@ public abstract class Component {
 		public static final String OpenEventPopup = "OPENEVENTPOPUP";
 		public static final String CloseEventPopup = "CLOSEEVENTPOPUP";
 		public static final String ChooseEventOption = "CHOOSEEVENTOPTION";
+		public static final String EndEvent = "ENDEVENT";
 
 		public static final String IncreaseSatisfactionScore = "INCREASESATISFACTIONSCORE";
 		public static final String DecreaseSatisfactionSccore = "DECREASESATISFACTIONSCORE";

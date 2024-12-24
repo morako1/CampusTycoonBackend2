@@ -1,15 +1,17 @@
 package CampusTycoon.UI.Components;
 
 import java.util.List;
+import java.util.Random;
 import java.util.function.Consumer;
 
+import CampusTycoon.GameLogic.Events.Event;
+import CampusTycoon.GameLogic.Events.StrikeEvent;
+import CampusTycoon.GameLogic.Timer;
 import CampusTycoon.UI.Component;
 import CampusTycoon.UI.ScreenUtils;
 import CampusTycoon.GameUtils;
-import CampusTycoon.GameLogic.Event;
 import CampusTycoon.GameLogic.MapUtils;
 import com.badlogic.gdx.Gdx;
-import CampusTycoon.GameLogic.Timer;
 
 import static CampusTycoon.GameLogic.Timer.pause;
 import static CampusTycoon.GameLogic.Timer.resume;
@@ -50,7 +52,7 @@ public class Button extends Component {
     }
 
 	protected static void openEventPopup(Boolean isAction) {
-		GameUtils.currentEvent = new Event();
+		GameUtils.currentEvent = new StrikeEvent();
 		System.out.println("Event opened");
 	}
 
@@ -63,6 +65,31 @@ public class Button extends Component {
 		GameUtils.currentEvent.eventUI.close();
 		System.out.println("Event closed");
 	}
+
+    protected static void EndEvent(Boolean isAction) {
+
+        Timer.isRunning = true;
+
+
+
+        GameUtils.currentEvent.applyEffects();
+
+        GameUtils.currentEvent.eventUI.close();
+
+
+
+        GameUtils.currentEvent = null;
+
+        if(!Timer.eventQueue.isEmpty()){
+
+            Random random = new Random();
+            Timer.eventQueue.remove(0);
+            Timer.nextEvent = Timer.getTimeRemaining() -(random.nextInt((61))+20);
+
+        }
+
+        System.out.println("Event closed");
+    }
 
 	protected void chooseEventOption(Boolean isAction) {
 		GameUtils.currentEvent.chooseOption(value);
@@ -132,6 +159,9 @@ public class Button extends Component {
 				break;
 			case Actions.CloseEventPopup:
 				action = a -> closeEventPopup(a);
+
+            case Actions.EndEvent:
+                action = a -> EndEvent(a);
 				break;
 
 			case Actions.ChooseEventOption:

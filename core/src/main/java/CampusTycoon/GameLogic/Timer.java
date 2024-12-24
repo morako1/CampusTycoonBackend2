@@ -1,10 +1,13 @@
 package CampusTycoon.GameLogic;
 
+import CampusTycoon.GameLogic.Events.EventsEnum;
+import CampusTycoon.GameLogic.Events.StrikeEvent;
+import CampusTycoon.GameUtils;
 import CampusTycoon.UI.ScreenUtils;
 import CampusTycoon.UI.Components.MenuText;
 import CampusTycoon.UI.Drawer;
 
-import static CampusTycoon.GameUtils.createGameplayUI;
+import java.util.*;
 
 
 public class Timer{
@@ -12,15 +15,30 @@ public class Timer{
     private static float timeRemaining;
     public static boolean isRunning;
     private boolean hasEnded;
+    public static ArrayList<EventsEnum> eventQueue;
+    public static float nextEvent;
+    public static float eventResult;
 
 
     public Timer(float startTime) {
+
+
+        eventQueue = new ArrayList<EventsEnum>();
+
+        eventQueue.addAll(Arrays.asList(EventsEnum.values()));
+
+        Collections.shuffle(eventQueue);
+
         this.timeRemaining = startTime;
         this.isRunning = false;
         this.hasEnded = false;
     }
 
     public void start() {
+
+        Random random = new Random();
+        nextEvent = 300f -(random.nextInt((61))+20);
+
         isRunning = true;
         hasEnded = false; // Reset if the timer is restarted
     }
@@ -39,6 +57,7 @@ public class Timer{
     }
 
     public void update(float deltaTime) {
+
         if (isRunning && timeRemaining > 0) {
             timeRemaining -= deltaTime;
             if (timeRemaining <= 0) {
@@ -46,11 +65,57 @@ public class Timer{
                 onTimeUp(); // Call onTimeUp to handle end logic
             }
 
-			if (text != null) {
+            if(nextEvent>0& !eventQueue.isEmpty()){
+
+
+                if(timeRemaining<=nextEvent){
+                    CallEvent();
+                }
+
+
+            }
+            else if (eventResult>0&!eventQueue.isEmpty()) {
+                if(timeRemaining<=eventResult){
+                    CallEventResult();
+                }
+            }
+
+            if (text != null) {
 				text.text = "Time: " + String.valueOf(timeRemaining).split("\\.")[0];
 				text.update();
 			}
         }
+    }
+
+
+    public void CallEvent(){
+        nextEvent = -1;
+
+        if(eventQueue.isEmpty()){
+
+            return;
+        }
+
+        switch(eventQueue.get(0)){
+            case STRIKE -> GameUtils.currentEvent= new StrikeEvent();
+            case VIRUS -> GameUtils.currentEvent= new StrikeEvent();
+        }
+
+
+
+    }
+
+    public void CallEventResult(){
+        eventResult = -1;
+
+        if(eventQueue.isEmpty()){
+
+            return;
+        }
+
+        GameUtils.EventResultPopup();
+
+
     }
 
     public static float getTimeRemaining() {
