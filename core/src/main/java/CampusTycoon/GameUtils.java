@@ -19,6 +19,8 @@ import CampusTycoon.GameLogic.Events.Event;
 import CampusTycoon.GameLogic.Buildings.*;
 import CampusTycoon.GameLogic.Timer;
 
+import static CampusTycoon.GameLogic.Timer.getFinalScore;
+
 public class GameUtils {
 	public static Map map;
 	public static Event currentEvent;
@@ -265,6 +267,7 @@ public class GameUtils {
 
     }
 
+
 	public static void createEventPopupUI(Event event) {
 		Backdrop eventScreenBackdrop = new Backdrop("Backdrop.png", 0, 30, 400, 350);
 		eventScreenBackdrop.setAnchor(Anchor.Centre);
@@ -316,6 +319,10 @@ public class GameUtils {
 	public static void createEndScreenUI() {
         Button buttonSaveScore = new Button("Save Score.png", 0, 90, 262, 66);
         buttonSaveScore.setAnchor(Anchor.Centre);
+
+        MenuText finalScore = new MenuText("Score: "+ (getFinalScore()), -50, 200, 2f, 2f);
+        finalScore.setAnchor(Anchor.Centre);
+        Drawer.add(1, finalScore);
 
 		Button buttonMainMenu = new Button("Main Menu.png", 0, 20, 262, 66);
 		buttonMainMenu.setClickAction(Actions.OpenStartScreen);

@@ -8,7 +8,8 @@ import CampusTycoon.UI.Components.MenuText;
 import CampusTycoon.UI.Drawer;
 
 import java.util.*;
-
+import static CampusTycoon.GameLogic.SatisfactionMeter.getSatisfactionScore;
+import static CampusTycoon.GameLogic.SatisfactionMeter.resetSatisfactionScore;
 
 public class Timer{
 	public static MenuText text;
@@ -18,6 +19,7 @@ public class Timer{
     public static ArrayList<EventsEnum> eventQueue;
     public static float nextEvent;
     public static float eventResult;
+    public static int score;
 
 
     public Timer(float startTime) {
@@ -132,8 +134,14 @@ public class Timer{
             isRunning = false; // Stop the timer completely
 
             Drawer.clear();
+            score = getSatisfactionScore();
+            resetSatisfactionScore();
             ScreenUtils.OpenEndScreen();
 			BuildingCounter.reset();
         }
+    }
+
+    public static int getFinalScore(){
+        return score;
     }
 }
