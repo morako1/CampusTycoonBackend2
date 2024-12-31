@@ -37,6 +37,11 @@ public class Button extends Component {
 		System.out.println("Screen changed to StartScreen");
 	}
 
+    protected static void OpenSaveScreen(Boolean isAction) {
+        ScreenUtils.OpenSaveScreen();
+        System.out.println("Screen changed to Save Screen");
+    }
+
     protected static void quitGame(Boolean isAction) {
         Gdx.app.exit();
     }
@@ -149,6 +154,10 @@ public class Button extends Component {
             case Actions.OpenLeaderboardScreen:
                 action = a -> openLeaderboardScreen(a);
                 break;
+            case Actions.OpenSaveScreen:
+                action = a -> OpenSaveScreen(a);
+                break;
+
             case Actions.QuitGame:
                 action = a -> quitGame(a);
                 break;

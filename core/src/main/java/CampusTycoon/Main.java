@@ -12,18 +12,18 @@ public class Main extends Game {
     @Override
     public void create() {
 		//Gdx.graphics.setForegroundFPS(60); // Useful function for settings menu later
-        //Gdx.graphics.setContinuousRendering(false); // Interesting function to explore later 
+        //Gdx.graphics.setContinuousRendering(false); // Interesting function to explore later
         //(^if rendering performance becomes an issue)
-            
+
         Gdx.graphics.setTitle("Campus Tycoon");
         Gdx.input.setInputProcessor(new InputHandler());
-		
+
 		// Sets the screen to the Main Menu
 		Screen screen = new StartScreen();
 		ScreenUtils.currentScreen = screen;
 		setScreen(screen);
 	}
-	
+
 	@Override
 	public void render () {
 		if (screen != null) screen.render(Gdx.graphics.getDeltaTime());

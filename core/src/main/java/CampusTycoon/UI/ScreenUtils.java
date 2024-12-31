@@ -9,6 +9,7 @@ public final class ScreenUtils {
 	public static Screen gameplayScreen = new GameplayScreen();
 	public static Screen endScreen = new EndScreen();
     public static Screen leaderboardScreen = new LeaderboardScreen();
+    public static Screen saveScreen = new saveScreen();
 
 
 	public static void openGameplayScreen() {
@@ -22,6 +23,10 @@ public final class ScreenUtils {
 	public static void OpenStartScreen() {
 		currentScreen = startScreen;
 	}
+
+    public static void OpenSaveScreen() {
+        currentScreen = saveScreen;
+    }
 
     public static void OpenLeaderboardScreen() {currentScreen = leaderboardScreen;}
 }

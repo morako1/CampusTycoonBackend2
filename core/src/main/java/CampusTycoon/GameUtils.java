@@ -1,5 +1,6 @@
 package CampusTycoon;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,9 +20,10 @@ import CampusTycoon.GameLogic.Events.Event;
 import CampusTycoon.GameLogic.Buildings.*;
 import CampusTycoon.GameLogic.Timer;
 
+
 import static CampusTycoon.GameLogic.Timer.getFinalScore;
 
-public class GameUtils {
+public class GameUtils{
 	public static Map map;
 	public static Event currentEvent;
 
@@ -318,6 +320,7 @@ public class GameUtils {
 
 	public static void createEndScreenUI() {
         Button buttonSaveScore = new Button("Save Score.png", 0, 90, 262, 66);
+        buttonSaveScore.setClickAction(Actions.OpenSaveScreen);
         buttonSaveScore.setAnchor(Anchor.Centre);
 
         MenuText finalScore = new MenuText("Score: "+ (getFinalScore()), -50, 200, 2f, 2f);
@@ -372,5 +375,16 @@ public class GameUtils {
         // (Allows buttons to be clicked and things to actually happen)
         InputHandler.add(endScreenButtonList);
     }
+
+    public static void createSaveScreenUI() {
+
+
+
+
+
+
+    }
+
+
 }
 

@@ -22,6 +22,7 @@ public abstract class Component {
 		public static final String OpenStartScreen = "OPENSTARTSCREEN";
         public static final String OpenLeaderboardScreen = "OPENLEADERBOARDSCREEN";
         public static final String QuitGame = "QUITGAME";
+        public static final String OpenSaveScreen = "OPENSAVESCREEN";
 
 		public static final String OpenEventPopup = "OPENEVENTPOPUP";
 		public static final String CloseEventPopup = "CLOSEEVENTPOPUP";
