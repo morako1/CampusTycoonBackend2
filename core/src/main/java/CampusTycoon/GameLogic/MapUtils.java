@@ -52,14 +52,31 @@ public class MapUtils {
 			// overlap with an existing building
 			if (newPos.x + newBuilding.width - 1 >= b.x && newPos.x < b.x + Building.width &&
 					newPos.y + newBuilding.height - 1 >= b.y && newPos.y < b.y + Building.height) {
-                return false;
-            }
-            //If the game is paused do not allow placement
-            if (!isRunning) {
-                return false;
-            }
+				return false;
+			}
+			// If the game is paused do not allow placement
+			if (!isRunning) {
+				return false;
+			}
 
+		}
+		// Checks if the position of the new building would overlap with water or
+		// mountains
+		String aUnique = York.RawMap;
+		String[] bUnique = aUnique.split("\n");
+		String[] cUnique = bUnique[1].split(" ");
+		String dUnique = cUnique[0];
+		try {
 
+			for (int iUnique = 0; iUnique < newBuilding.width; iUnique++) {
+				for (int jUnique = 0; jUnique < newBuilding.height; jUnique++) {
+					cUnique = bUnique[48 - newBuilding.position.y - jUnique].split(" ");
+					if (!(Integer.parseInt(cUnique[newBuilding.position.x + iUnique]) == Integer.parseInt(dUnique))) {
+						return false;
+					}
+				}
+			}
+		} catch (Exception e) {
 		}
 		return true;
 	}
@@ -92,14 +109,14 @@ public class MapUtils {
 		map.placing = true;
 
 		// Adds a few different buildings to the map
-		map.placementType = Placement.CafeteriaBuilding;
-		map.placeBuilding(new Coordinate(4, 5));
-
-		map.placementType = Placement.StudyBuilding;
-		map.placeBuilding(new Coordinate(10, 13));
-
+		// Used to add a few buildings, was disabled due to bug with desyncing camera
+		// when collision with map was added
+		// map.placementType = Placement.CafeteriaBuilding;
+		// map.placeBuilding(new Coordinate(4, 5));
+		// map.placementType = Placement.StudyBuilding;
+		// map.placeBuilding(new Coordinate(10, 13));
 		map.placementType = Placement.AccommodationBuilding;
-		map.placeBuilding(new Coordinate(23, 14));
+		// map.placeBuilding(new Coordinate(23, 14));
 	}
 
 	public void initialiseGrid() {
