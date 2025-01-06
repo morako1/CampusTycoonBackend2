@@ -1,5 +1,8 @@
 package CampusTycoon.UI.Components;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+
 import java.io.*;
 import java.util.*;
 
@@ -10,79 +13,103 @@ import java.util.*;
 
 public class Leaderboard {
 
+    public static Map<String,Integer> leaderboardmap;
 
-    // Load the leaderboard from the file
-    private static Map<String, Integer> loadLeaderboard() throws IOException {
-        Map<String, Integer> leaderboard = new HashMap<>();
-        File file = new File("leaderboard.txt");
 
-        //If the file doesn't exist, create it
-        if(!file.exists()) {
-            file.createNewFile();
-            return leaderboard;
+    public static Map<String,Integer> StringToMap(String input){
 
-        }
 
-        //File did exist so read from it
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // Split leaderboard contents into key and value pairs
-                String[] parts = line.split(",");
-                if (parts.length == 2) {
-                    String name = parts[0].trim();
-                    int score = Integer.parseInt(parts[1].trim());
-                    leaderboard.put(name, score);
-                }
+
+        // Create variable to store result
+        Map<String, Integer> map = new HashMap<>();
+
+        // Remove the brackets
+        String trimmedInput = input.substring(1, input.length() - 1);
+
+        // Split the string by commas
+        String[] pairs = trimmedInput.split(", ");
+        for (String pair : pairs) {
+            // Split each pair by "=" to separate key and value
+            String[] keyValue = pair.split("=");
+            if (keyValue.length == 2) {
+                String key = keyValue[0].trim();
+                int value = Integer.parseInt(keyValue[1].trim());
+                // Put the key-value pair into the map
+                map.put(key, value);
             }
         }
 
-        return leaderboard;
+
+        return  map;
+        }
+
+
+
+    // Load the leaderboard from the file
+    public static void loadLeaderboard() throws IOException {
+
+        Preferences prefs = Gdx.app.getPreferences("scores");
+        String leaderboardString = prefs.getString("scores","");
+        System.out.println(leaderboardString+"Saved");
+        leaderboardmap =StringToMap(leaderboardString);
+
+
     }
 
     // Save the leaderboard back to the file
-    private static void saveLeaderboard(Map<String, Integer> leaderboard) throws IOException {
-        List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<>(leaderboard.entrySet());
+    public static void saveLeaderboard() throws IOException {
+        Preferences prefs = Gdx.app.getPreferences("scores");
+        List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<>(leaderboardmap.entrySet());
 
         //Sort the entries by score in descending order
         sortedEntries.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("leaderboard.txt"))) {
-            for (Map.Entry<String, Integer> entry : sortedEntries) {
-                writer.write(entry.getKey() + "," + entry.getValue());
-                writer.newLine();
-            }
-        }
+        prefs.putString("scores",sortedEntries.toString());
+
+        prefs.flush();
+
     }
 
     //Display the leaderboard in a readable format
-    private static void displayLeaderboard(Map<String, Integer> leaderboard) {
+    public static String displayLeaderboard() {
+        String output="";
+
         // Sort the entries by score in descending order
-        List<Map.Entry<String, Integer>> sortedEntries = leaderboard.entrySet().stream()
+        List<Map.Entry<String, Integer>> sortedEntries = leaderboardmap.entrySet().stream()
             .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
             .toList();
 
         // Display each entry with its ranking
         int rank = 1;
         for (Map.Entry<String, Integer> entry : sortedEntries) {
-            System.out.println(rank + ". " + entry.getKey() + ": " + entry.getValue());
+            output+=(rank + ". " + entry.getKey() + ": " + entry.getValue()+"\n");
+            //System.out.println(rank + ". " + entry.getKey() + ": " + entry.getValue());
             rank++;
         }
+        return output;
     }
 
 
     // Update a player's score (or add a new player if they are new)
-    private static void updateScore(Map<String, Integer> leaderboard, String player, int newScore) {
-        if (leaderboard.containsKey(player)){
-            int currentScore = leaderboard.get(player);
+    public static void updateScore( String player, int newScore) {
+
+        if (leaderboardmap.containsKey(player)){
+            int currentScore = leaderboardmap.get(player);
             if(newScore > currentScore){
                 //if score is greater than previous score
-                leaderboard.put(player, newScore);
-            }else{
-                //if player does not exist
-                leaderboard.put(player,newScore);
+                leaderboardmap.put(player, newScore);
+            }
+            else{
+                //if  score is less than previous score
+                leaderboardmap.put(player,currentScore);
             }
 
         }
+        else{
+
+            leaderboardmap.put(player,newScore);
+
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 package CampusTycoon.UI;
 
+import CampusTycoon.UI.Components.Leaderboard;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -7,12 +8,38 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import CampusTycoon.GameUtils;
 import CampusTycoon.InputHandler;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class StartScreen implements Screen{
 
+
+
+
+
     /** First screen of the application. Displayed after the application is created. */
-        public StartScreen() {
+        public StartScreen()  {
+
+            //Assessment 2
+            //Load the leaderboard
+        try {
+                loadLeaderboard();
+            } catch (IOException e)
+        {
+                throw new RuntimeException(e);
+            }
+
         }
+
+        public void loadLeaderboard() throws IOException {
+            Leaderboard.loadLeaderboard();
+
+
+        }
+
+
 
         @Override
         public void show() {

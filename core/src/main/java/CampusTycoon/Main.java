@@ -19,6 +19,7 @@ public class Main extends Game {
         Gdx.input.setInputProcessor(new InputHandler());
 
 		// Sets the screen to the Main Menu
+
 		Screen screen = new StartScreen();
 		ScreenUtils.currentScreen = screen;
 		setScreen(screen);
