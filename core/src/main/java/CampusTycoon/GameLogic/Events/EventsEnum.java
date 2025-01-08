@@ -1,6 +1,6 @@
 package CampusTycoon.GameLogic.Events;
 
 public enum EventsEnum{
-    STRIKE,VIRUS
+    STRIKE,DONATE,CAT
 
 }

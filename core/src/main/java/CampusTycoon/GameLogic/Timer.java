@@ -1,6 +1,8 @@
 package CampusTycoon.GameLogic;
 
+import CampusTycoon.GameLogic.Events.CatEvent;
 import CampusTycoon.GameLogic.Events.EventsEnum;
+import CampusTycoon.GameLogic.Events.DonateEvent;
 import CampusTycoon.GameLogic.Events.StrikeEvent;
 import CampusTycoon.GameUtils;
 import CampusTycoon.UI.ScreenUtils;
@@ -40,6 +42,7 @@ public class Timer{
 
         Random random = new Random();
         nextEvent = 300f -(random.nextInt((61))+20);
+
 
         isRunning = true;
         hasEnded = false; // Reset if the timer is restarted
@@ -100,7 +103,8 @@ public class Timer{
 
         switch(eventQueue.get(0)){
             case STRIKE -> GameUtils.currentEvent= new StrikeEvent();
-            case VIRUS -> GameUtils.currentEvent= new StrikeEvent();
+            case DONATE -> GameUtils.currentEvent= new DonateEvent();
+            case CAT -> GameUtils.currentEvent= new CatEvent();
         }
 
 

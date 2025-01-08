@@ -5,6 +5,7 @@ import CampusTycoon.GameLogic.Timer;
 import CampusTycoon.GameUtils;
 import CampusTycoon.UI.Systems.EventPopup;
 
+import javax.annotation.processing.SupportedAnnotationTypes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,8 +20,8 @@ public class StrikeEvent extends Event{
 
 
         eventText= "The teaching staff at your university\nhave declared a strike as they feel they\nare underpaid. Lectures and tutorials\nare canceled, leaving students\nannoyed. The disruption could have\nnegative effects on student satisfaction.\n \nWill you accept or deny the teachers\nrequest for more pay?";
-        acceptText = "Teachers resume their lectures and\ntutorials, grateful for the administrations\nsupport. Their enthusiasm rubs off on\nthe students. who feel reassured that\nthey can continue their education.\n\n+10% Student Satisfaction\n-$100";
-        rejectText="";
+        acceptText = "Teachers resume their lectures and\ntutorials, grateful for the administrations\nsupport.\n\n-$100";
+        rejectText="Your students are upset as lectures\nand tutorials have been interrupted\n\n-20 satisfaction";
         choiceText= new ArrayList<String>(Arrays.asList(
             "Accept","Reject"));
        UI();
@@ -35,8 +36,10 @@ public class StrikeEvent extends Event{
             System.out.println("accept effect");
 
         }
+
         //reject
         else if (choice ==2) {
+            SatisfactionMeter.decreaseSatisfactionScore(20);
             System.out.println("reject effect");
         }
 
