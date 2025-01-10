@@ -371,7 +371,7 @@ public class GameUtils{
 
 
 
-           String leaderBoardString =  Leaderboard.displayLeaderboard();
+          String leaderBoardString =  Leaderboard.displayLeaderboard();
 
             MenuText leaderboardText = new MenuText(leaderBoardString, -60f,100,1.5f,1.5f);
             leaderboardText.setAnchor(Anchor.Centre);
