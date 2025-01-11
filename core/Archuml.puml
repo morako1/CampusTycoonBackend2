@@ -72,6 +72,7 @@ package CampusTycoon {
                 +List<String> choiceText
                 +String resultText
                 +int choice
+                +Event()
                 +void UI()
                 +void chooseOption(int option)
                 +void Option1()
@@ -79,24 +80,39 @@ package CampusTycoon {
                 +void End()
                 +void applyEffects()
             }
+            class CatEvent extends Event {
+                +CatEvent()
+                +void applyEffects()
+            
+            }
+
+            class DonateEvent extends Event {
+                +StrikeEvent()
+                +void applyEffects()
+            }    
 
             class StrikeEvent extends Event {
+                +StrikeEvent()
+                +void applyEffects()
             }
 
             enum EventsEnum {
-                STRIKE, VIRUS
+                STRIKE, DONATE,CAT
             }
         }
 
     'TODO: the Tiles class folder  '
         package Tiles {
-            class Grass {
+
+            class Grass implements Tile {
             }
-            class Grass {
+            class Lake implements Tile  {
+            }            
+            class Mountain implements Tile {
             }
-            class Mountain {
-            }
-            class Tile {
+            interface Tile {
+                +int getTileID()
+                +Coordinate getCoordinates()
             }
         }
         
@@ -107,16 +123,21 @@ package CampusTycoon {
             +void decreaseBuildingCounter()
 
 
-        }       
+        }
+
         class Coordinate {
             +int x
             +int y
             +Coordinate(int x, int y)
             +Coordinate()
-            +CoordinatePair getPair()
-        }
-
-        class CoordinatePair {
+            +double distance(Coordinate point)
+            }
+    
+        
+        class CoordinatePair extends Coordinate {
+            +Coordinate start
+            +Coordinate end
+            +CoordinatePair(Coordinate start, Coordinate end)
         }
 
         class Map {
