@@ -62,28 +62,6 @@ package CampusTycoon {
             }
         }
 
-        class BuildingCounter {
-            -int buildingCount
-            +int getBuildingCount()
-            +void increaseBuildingCounter()
-            +void decreaseBuildingCounter()
-
-
-        }
-
-
-       
-        class Coordinate {
-            +int x
-            +int y
-            +Coordinate(int x, int y)
-            +Coordinate()
-            +CoordinatePair getPair()
-        }
-
-        class CoordinatePair {
-        }
-
         package Event {
             class Event {
                 +EventPopup eventUI
@@ -108,6 +86,27 @@ package CampusTycoon {
             enum EventsEnum {
                 STRIKE, VIRUS
             }
+        }
+        class BuildingCounter {
+            -int buildingCount
+            +int getBuildingCount()
+            +void increaseBuildingCounter()
+            +void decreaseBuildingCounter()
+
+
+        }
+
+
+       
+        class Coordinate {
+            +int x
+            +int y
+            +Coordinate(int x, int y)
+            +Coordinate()
+            +CoordinatePair getPair()
+        }
+
+        class CoordinatePair {
         }
 
         class Map {
