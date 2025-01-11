@@ -3,16 +3,21 @@
 package CampusTycoon {
     package GameLogic {
         class BuildingCounter {
+            -int buildingCount
+            +int getBuildingCount()
+            +void increaseBuildingCounter()
+            +void decreaseBuildingCounter()
+
+        
         }
 
-        package Buildings {
+
+        package Building {
             class Building extends Coordinate {
                 -Coordinate position
                 -int width
                 -int height
                 -MapBuilding drawInfo
-                +void setPosition(Coordinate Position)
-                +void incrementBuildingCounter()
                 +Building()
                 +Building(Coordinate Position)
                 +Building(Coordinate Position, String Imagepath, Int Width, int Height)
@@ -47,7 +52,7 @@ package CampusTycoon {
         class CoordinatePair {
         }
 
-        package Events {
+        package Event {
             class Event {
                 +EventPopup eventUI
                 +int choices
@@ -146,13 +151,13 @@ package CampusTycoon {
         }
 
         class Component {
-            +float scale
-            +float offsetX
-            +float offsetY
-            +float baseX
-            +float baseY
-            +float baseWidth
-            +float baseHeight
+            -float scale
+            -float offsetX
+            -float offsetY
+            -float baseX
+            -float baseY
+            -float baseWidth
+            -float baseHeight
             +float x
             +float y
             +float width
@@ -160,7 +165,7 @@ package CampusTycoon {
             +String anchor
             +Sprite sprite
             +Boolean isText
-            +String text
+            String text
             +void update()
             +void setAnchor(String anchorPoint)
             +void setScale(float Scale)
@@ -190,6 +195,7 @@ package CampusTycoon {
                 +button(float X, float Y, float Width, float Height)
                 +int value
                 +void setClickAction(String Action)
+
             }
 
             class MapBuilding extends Component {
@@ -288,7 +294,7 @@ package CampusTycoon {
 
             class BuildingDisplay {
                 -List<Building> buildings
-                -BuildingDisplay(List<Building> Buildings)                
+                +BuildingDisplay(List<Building> Buildings)                
                 +void drawBuildings()
             }
 
