@@ -61,7 +61,7 @@ package CampusTycoon {
             class SpaceStation extends Building {
             }
         }
-
+    'TODO: the Events class folder  '
         package Event {
             class Event {
                 +EventPopup eventUI
@@ -87,6 +87,19 @@ package CampusTycoon {
                 STRIKE, VIRUS
             }
         }
+
+    'TODO: the Tiles class folder  '
+        package Tiles {
+            class Grass {
+            }
+            class Grass {
+            }
+            class Mountain {
+            }
+            class Tile {
+            }
+        }
+        
         class BuildingCounter {
             -int buildingCount
             +int getBuildingCount()
@@ -94,10 +107,7 @@ package CampusTycoon {
             +void decreaseBuildingCounter()
 
 
-        }
-
-
-       
+        }       
         class Coordinate {
             +int x
             +int y
@@ -133,10 +143,7 @@ package CampusTycoon {
         class SatisfactionMeter {
         }
 
-        package Tiles {
-            class Tiles {
-            }
-        }
+
 
         class Timer {
             +static boolean isRunning
@@ -145,7 +152,10 @@ package CampusTycoon {
             +static void resume()
         }
 
+        class TimerTest{}
+
         class York {
+            +static final String RawMap
         }
     }
 
