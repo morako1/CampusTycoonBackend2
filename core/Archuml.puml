@@ -161,7 +161,64 @@ package CampusTycoon {
 
 
     package UI {
-        class Camera {
+       
+        package Components {
+            class Button extends Component {
+                +button(float X, float Y, float Width, float Height, String ImagePath)
+                +button(float X, float Y, float Width, float Height)
+                +int value
+                +void setClickAction(String Action)
+
+            }
+
+            class MapBuilding extends Component {
+                -float gridBaseWidth
+                -float gridBaseHeight
+                -float gridX
+                -float gridY
+
+                +MapBuilding()
+                +void setGridCoordinates(int X, int Y)
+                +void applyZoomOffset()
+            }
+
+            class MapTile extends Component {
+                +int mapHeight
+                +int gridX
+                +int gridY
+                +void applyZoomOffset()
+            }
+        }
+        
+        package Systems {
+            class Window {
+                +static void updateResolution(int width, int height)
+            }
+
+            class BuildingDisplay {
+                -List<Building> buildings
+                +BuildingDisplay(List<Building> Buildings)
+                +void drawBuildings()
+            }
+
+            class MapDisplay {
+
+                -Map map
+                -List<MapTile> mapTile
+                +SpriteSheet spriteSheet
+                +void drawMap()
+            }
+
+            class EventPopup {
+                +Event event
+                +List<Component> elements
+                +List<Component> buttonElements
+                +void initialise()
+                +void close()
+            }
+        }
+
+ class Camera {
         }
 
         class Component {
@@ -201,34 +258,6 @@ package CampusTycoon {
             +void setWidth(float width)
             +void setClickAction(String action)
             +void setOffset(float X, float Y)
-        }
-
-        package Components {
-            class Button extends Component {
-                +button(float X, float Y, float Width, float Height, String ImagePath)
-                +button(float X, float Y, float Width, float Height)
-                +int value
-                +void setClickAction(String Action)
-
-            }
-
-            class MapBuilding extends Component {
-                -float gridBaseWidth
-                -float gridBaseHeight
-                -float gridX
-                -float gridY
-
-                +MapBuilding()
-                +void setGridCoordinates(int X, int Y)
-                +void applyZoomOffset()
-            }
-
-            class MapTile extends Component {
-                +int mapHeight
-                +int gridX
-                +int gridY
-                +void applyZoomOffset()
-            }
         }
 
         class Drawer {
@@ -301,33 +330,9 @@ package CampusTycoon {
         class StartScreen {
         }
 
-        package Systems {
-            class Window {
-                +static void updateResolution(int width, int height)
-            }
-
-            class BuildingDisplay {
-                -List<Building> buildings
-                +BuildingDisplay(List<Building> Buildings)
-                +void drawBuildings()
-            }
-
-            class MapDisplay {
-
-                -Map map
-                -List<MapTile> mapTile
-                +SpriteSheet spriteSheet
-                +void drawMap()
-            }
-
-            class EventPopup {
-                +Event event
-                +List<Component> elements
-                +List<Component> buttonElements
-                +void initialise()
-                +void close()
-            }
+        class Window {
         }
+
     }
 }
 
