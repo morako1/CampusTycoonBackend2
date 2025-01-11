@@ -18,7 +18,10 @@ public class Leaderboard {
 
     public static Map<String,Integer> StringToMap(String input){
 
+        if(input.isEmpty()){
+            return new HashMap<>();
 
+        }
 
         // Create variable to store result
         Map<String, Integer> map = new HashMap<>();
