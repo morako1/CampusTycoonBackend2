@@ -1,0 +1,319 @@
+@startuml
+
+package CampusTycoon {
+    package GameLogic {
+        class BuildingCounter {
+            -int buildingCount
+            +int getBuildingCount()
+            +void increaseBuildingCounter()
+            +void decreaseBuildingCounter()
+
+        
+        }
+
+
+        package Building {
+            class Building extends Coordinate {
+                -Coordinate position
+                -int width
+                -int height
+                -MapBuilding drawInfo
+                +Building()
+                +Building(Coordinate Position)
+                +Building(Coordinate Position, String Imagepath, Int Width, int Height)
+                +void setPosition(Coordinate Position)
+            
+            }
+
+            class Accommodation extends Building {
+            }
+
+            class Cafeteria extends Building {
+            }
+
+            class Relaxation extends Building {
+            }
+
+            class Study extends Building {
+            }
+
+            class SpaceStation extends Building {
+            }
+        }
+
+        class Coordinate {
+            +int x
+            +int y
+            +Coordinate(int x, int y)
+            +Coordinate()
+            +CoordinatePair getPair()
+        }
+
+        class CoordinatePair {
+        }
+
+        package Event {
+            class Event {
+                +EventPopup eventUI
+                +int choices
+                +String eventText
+                +String acceptText
+                +String rejectText
+                +List<String> choiceText
+                +String resultText
+                +int choice
+                +void UI()
+                +void chooseOption(int option)
+                +void Option1()
+                +void Option2()
+                +void End()
+                +void applyEffects()
+            }
+
+            class StrikeEvent extends Event {
+            }
+
+            enum EventsEnum {
+                STRIKE, VIRUS
+            }
+        }
+
+        class Map {
+            -List<Building> buildings
+            -BuildingDisplay buildingDisplay
+            -MapUtils mapUtils
+            -boolean placing
+            -String placementType
+            +void toggleBuildingPlacement(String building)
+            +void placeBuilding(Coordinate position)
+        }
+
+        class MapUtils {
+            -Map map
+            +static Building getBuilding(String buildingType)
+            +boolean buildingPlaceable(Building newBuilding)
+            +boolean tileHasBuilding(Coordinate tile)
+            +boolean outsideMap(Coordinate tile)
+            +void initialiseBuildings()
+            +void initialiseGrid()
+            +Tile getTile(int tileID)
+        }
+
+        class SatisfactionMeter {
+        }
+
+        package Tiles {
+            class Tiles {
+            }
+        }
+
+        class Timer {
+            +static boolean isRunning
+            +static float getTimeRemaining()
+            +static void pause()
+            +static void resume()
+        }
+
+        class York {
+        }
+    }
+
+    class GameUtils {
+        +static Map map
+        +static Event currentEvent
+        +static void startGame()
+        +static String getHoverImagePath(String originalImage)
+        +static void createStartMenuUI()
+        +static void createGameplayUI()
+        +static void createEventPopupUI(Event event)
+        +static void createEndScreenUI()
+        +static void leaderboardUI()
+        +static void createSaveScreenUI()
+        +static void EventResultPopup()
+    }
+
+    class InputHandler {
+        +boolean touchDown(int x, int y, int pointer, int button)
+        +boolean touchUp(int x, int y, int pointer, int button)
+        +boolean touchDragged(int x, int y, int pointer)
+        +boolean mouseMoved(int x, int y)
+        +boolean scrolled(float amountX, float amountY)
+        +boolean touchCancelled(int screenX, int screenY, int pointer, int button)
+    }
+
+    class Main {
+        +void create()
+        +void render()
+    }
+
+    package UI {
+        class Camera {
+        }
+
+        class Component {
+            -float scale
+            -float offsetX
+            -float offsetY
+            -float baseX
+            -float baseY
+            -float baseWidth
+            -float baseHeight
+            +float x
+            +float y
+            +float width
+            +float height
+            +String anchor
+            +Sprite sprite
+            +Boolean isText
+            String text
+            +void update()
+            +void setAnchor(String anchorPoint)
+            +void setScale(float Scale)
+            +void setImage(String ImagePath)
+            +int left()
+            +int right()
+            +int top()
+            +int bottom()
+            +float getX()
+            +float getY()
+            +float getWidth()
+            +float getHeight()
+            +float getBaseX()
+            +float getBaseY()
+            +float getBaseWidth()
+            +float getBaseHeight()
+            +void setX(float x)
+            +void setY(float y)
+            +void setWidth(float width)
+            +void setClickAction(String action)
+            +void setOffset(float X, float Y)
+        }
+
+        package Components {
+            class Button extends Component {
+                +button(float X, float Y, float Width, float Height, String ImagePath)
+                +button(float X, float Y, float Width, float Height)
+                +int value
+                +void setClickAction(String Action)
+
+            }
+
+            class MapBuilding extends Component {
+                -float gridBaseWidth
+                -float gridBaseHeight
+                -float gridX
+                -float gridY
+
+                +MapBuilding()
+                +void setGridCoordinates(int X, int Y)
+                +void applyZoomOffset()
+            }
+
+            class MapTile extends Component {
+                +int mapHeight
+                +int gridX
+                +int gridY
+                +void applyZoomOffset()
+            }
+        }
+
+        class Drawer {
+            +static void clear()
+            +static void drawAll()
+            +static void updateAll()
+            +static void add(int layer, Component component)
+            +static void remove(int layer, Component component)
+            +static void remove(Component component)
+        }
+
+        class EndScreen {
+        }
+
+        class GameplayScreen {
+            +void show()
+            +void render(float delta)
+            +void resize(int width, int height)
+            +void pause()
+            +void resume()
+            +void hide()
+            +void dispose()
+        }
+
+        class LeaderboardScreen {
+            +void resume()
+            +void hide()
+            +void dispose()
+        }
+
+        class saveScreen {
+            +void show()
+            +void render(float delta)
+            +void resize(int width, int height)
+            +void pause()
+            +void resume()
+            +void hide()
+            +void dispose()
+            +void keyTyped()
+        }
+
+        class ScreenUtils {
+            +static void OpenStartScreen()
+            +static void OpenSaveScreen()
+            +static void openGameplayScreen()
+            +static void OpenLeaderboardScreen()
+            +static void clear(Color color)
+        }
+
+        class Sprite {
+            +void setImagePath(String ImagePath)
+            +String getImagePath()
+            +void updateImagePath(String ImagePath)
+            +void stepAnimation()
+            +Integer getID()
+            +void setDefaultImage(String imagePath)
+            +void setDefaultAnimation(List<String> imagePaths)
+            +void setDefaultImage(Integer spriteID)
+        }
+
+        class SpriteSheet {
+            -String image Path
+            -int spriteWidth
+            -int spriteHeight
+            +SpriteSheet(String ImagePath, int SpriteWidth, int SpriteHeight)
+            +Coordinate getSpriteCoordinates(int spriteID)
+
+        }
+
+        class StartScreen {
+        }
+
+        package Systems {
+            class Window {
+                +static void updateResolution(int width, int height)
+            }
+
+            class BuildingDisplay {
+                -List<Building> buildings
+                +BuildingDisplay(List<Building> Buildings)                
+                +void drawBuildings()
+            }
+
+            class MapDisplay { 
+                -Map map
+                -List<MapTile> mapTile
+                +SpriteSheet spriteSheet
+                +void drawMap()
+            }
+
+            class EventPopup {
+                +Event event
+                +List<Component> elements
+                +List<Component> buttonElements
+                +void initialise()
+                +void close()
+            }
+        }
+    }
+}
+
+@enduml
