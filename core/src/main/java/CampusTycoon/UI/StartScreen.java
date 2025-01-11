@@ -1,12 +1,16 @@
 package CampusTycoon.UI;
 
+import CampusTycoon.TextInput;
 import CampusTycoon.UI.Components.Leaderboard;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import CampusTycoon.GameUtils;
 import CampusTycoon.InputHandler;
+
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,6 +26,7 @@ public class StartScreen implements Screen{
     /** First screen of the application. Displayed after the application is created. */
         public StartScreen()  {
 
+
             //Assessment 2
             //Load the leaderboard
         try {
@@ -34,7 +39,11 @@ public class StartScreen implements Screen{
         }
 
         public void loadLeaderboard() throws IOException {
+
             Leaderboard.loadLeaderboard();
+
+
+
 
 
         }

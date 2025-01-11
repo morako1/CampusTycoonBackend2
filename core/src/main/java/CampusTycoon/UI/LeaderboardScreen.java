@@ -1,5 +1,7 @@
 package CampusTycoon.UI;
 
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -16,6 +18,7 @@ public class LeaderboardScreen implements Screen{
 
     @Override
     public void show() {
+
         GameUtils.leaderboardUI();
     }
 
