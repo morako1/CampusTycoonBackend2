@@ -1,9 +1,6 @@
 package CampusTycoon.UI;
 
-import CampusTycoon.TextInput;
 import CampusTycoon.UI.Components.Leaderboard;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -13,8 +10,6 @@ import CampusTycoon.InputHandler;
 
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class StartScreen implements Screen{

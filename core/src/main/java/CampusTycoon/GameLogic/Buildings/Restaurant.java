@@ -7,7 +7,7 @@ public class Restaurant extends Building {
     public static final String defaultImage = "Buildings\\Restaurant.png";
     public static final String buildingName = "Restaurant";
     public static int width = 3, height = 3;
-
+    public static int cost = 40;
     public Restaurant(Coordinate Position) {
         super(Position, defaultImage, width, height);
     }

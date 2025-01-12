@@ -1,6 +1,7 @@
 package CampusTycoon.UI.Components;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.function.Consumer;
 
@@ -11,10 +12,12 @@ import CampusTycoon.UI.Component;
 import CampusTycoon.UI.ScreenUtils;
 import CampusTycoon.GameUtils;
 import CampusTycoon.GameLogic.MapUtils;
+import CampusTycoon.UI.saveScreen;
 import com.badlogic.gdx.Gdx;
 
 import static CampusTycoon.GameLogic.Timer.pause;
 import static CampusTycoon.GameLogic.Timer.resume;
+
 
 
 public class Button extends Component {
@@ -29,6 +32,7 @@ public class Button extends Component {
 	}
 
 	public Button(List<String> imagePaths, float X, float Y, float Width, float Height) {
+
 		super(imagePaths, X, Y, Width, Height);
 	}
 
@@ -56,7 +60,22 @@ public class Button extends Component {
         System.out.println("Screen changed to LeaderboardScreen");
     }
 
-	protected static void openEventPopup(Boolean isAction) {
+    //Assessment 2
+    //Button to open leaderboard from save score screen
+    protected static void openLeaderboardFromSave(Boolean isAction) {
+
+        if(Objects.equals(saveScreen.nameField.getText(), "")){
+            return;
+        }
+
+
+
+        ScreenUtils.OpenLeaderboardScreen();
+        System.out.println("Screen changed to LeaderboardScreen");
+    }
+
+
+    protected static void openEventPopup(Boolean isAction) {
 		GameUtils.currentEvent = new StrikeEvent();
 		System.out.println("Event opened");
 	}
@@ -153,6 +172,9 @@ public class Button extends Component {
 				break;
             case Actions.OpenLeaderboardScreen:
                 action = a -> openLeaderboardScreen(a);
+                break;
+            case Actions.OpenLeaderboardFromSave:
+                action = a -> openLeaderboardFromSave(a);
                 break;
             case Actions.OpenSaveScreen:
                 action = a -> OpenSaveScreen(a);

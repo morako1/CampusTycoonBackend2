@@ -7,6 +7,11 @@ public class SatisfactionMeter {
     private static int satisfactionScore = 0;
     private static int newscore = 0;
 
+
+
+
+
+
     public static int getSatisfactionScore() {
         return satisfactionScore;
     }

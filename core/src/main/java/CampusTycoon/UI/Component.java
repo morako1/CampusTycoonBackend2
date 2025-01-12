@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import CampusTycoon.GameLogic.Timer;
 
+
+
 public abstract class Component {
 
 	// Add to this class when implementing a new anchor point
@@ -20,6 +22,7 @@ public abstract class Component {
 	public final class Actions {
 		public static final String OpenGameplayScreen = "OPENGAMEPLAYSCREEN";
 		public static final String OpenStartScreen = "OPENSTARTSCREEN";
+        public static final String OpenLeaderboardFromSave = "OPENLEADERBOARDFROMSAVE";
         public static final String OpenLeaderboardScreen = "OPENLEADERBOARDSCREEN";
         public static final String QuitGame = "QUITGAME";
         public static final String OpenSaveScreen = "OPENSAVESCREEN";

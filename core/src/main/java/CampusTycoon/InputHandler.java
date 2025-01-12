@@ -13,11 +13,11 @@ public class InputHandler implements InputProcessor {
 	private static final int LeftClick = 0;
 	private static final int RightClick = 1;
 	private static final int MiddleClick = 2;
-	
+
 	private static List<Component> clickables = new ArrayList<Component>();
 	private static boolean leftClickDown = false;
-	
-	
+
+
 	// Removes a component from clickables, so that it stops being processed
 	// Does a linear search through the list to find the component
 	public static void remove(Component component) {
@@ -28,20 +28,20 @@ public class InputHandler implements InputProcessor {
 			}
 		}
 	}
-	
-	
+
+
 	public static void clear() {
 		clickables = new ArrayList<Component>();
 	}
-	
+
 	public static void add(Component button) {
 		clickables.add(button);
 	}
-	
+
 	public static void add(List<Component> buttons) {
 		clickables.addAll(buttons);
 	}
-	
+
 	public boolean keyDown(int keycode) {
 		return false;
 	}
@@ -56,21 +56,26 @@ public class InputHandler implements InputProcessor {
 
 	// Called on click
 	public boolean touchDown(int x, int y, int pointer, int button) {
+
 		if (button == LeftClick) {
 			leftClickDown = true;
 		}
-		
+
 		for (Component btn : clickables){
 			if (isTouchWithinButton(transformX(x), transformY(y), btn)) {
 				btn.onClick();
 				Camera.update();
+
 				return true;
 			}
+
 		}
-		
-		Camera.click(x, y, button);
-		return true;
-	}
+        Camera.click(x, y, button);
+        return false;
+
+
+        //return false;
+    }
 
 	private int transformX(int x) {
 		return (int)(x * Component.widthRatio);
@@ -89,6 +94,7 @@ public class InputHandler implements InputProcessor {
     }
 
 	public boolean touchUp(int x, int y, int pointer, int button) {
+
 		if (button == LeftClick) {
 			leftClickDown = false;
 			Camera.lift(x, y, button);
@@ -97,17 +103,20 @@ public class InputHandler implements InputProcessor {
 	}
 
 	public boolean touchDragged(int x, int y, int pointer) {
+
 		Camera.drag(x, y);
 		return true;
 	}
 
 	public boolean mouseMoved(int x, int y) {
+
 		Camera.checkMouseOverTile(x ,y);
 		Camera.drawCursor();
 		return true;
 	}
 
 	public boolean scrolled(float amountX, float amountY) {
+
 		Camera.scroll(amountY);
 		return true;
 	}

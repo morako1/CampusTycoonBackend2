@@ -5,9 +5,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import CampusTycoon.GameLogic.*;
 import CampusTycoon.GameLogic.Events.StrikeEvent;
-import CampusTycoon.GameLogic.Map;
-import CampusTycoon.GameLogic.SatisfactionMeter;
 import CampusTycoon.UI.Camera;
 import CampusTycoon.UI.Component;
 import CampusTycoon.UI.Component.Actions;
@@ -17,10 +16,8 @@ import CampusTycoon.UI.Drawer;
 import CampusTycoon.UI.Components.Backdrop;
 import CampusTycoon.UI.Components.Button;
 import CampusTycoon.UI.Components.MenuText;
-import CampusTycoon.GameLogic.BuildingCounter;
 import CampusTycoon.GameLogic.Events.Event;
 import CampusTycoon.GameLogic.Buildings.*;
-import CampusTycoon.GameLogic.Timer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
@@ -199,6 +196,14 @@ public class GameUtils{
         SatisfactionMeter.satisfactionText = satisfactionText;
         SatisfactionMeter.updateDisplay();
 
+        //Assessment 2
+        MenuText moneyText = new MenuText("", -250, 20, 2f, 2f);
+        moneyText.setAnchor(Anchor.TopCentre);
+        Money.MoneyText = moneyText;
+        Money.updateDisplay();
+
+
+
 //		MenuText notifText1 = new MenuText("Notification 1", 130, 23, 1.5f, 1.5f);
 //		notifText1.setAnchor(Anchor.TopLeft);
 //
@@ -214,7 +219,7 @@ public class GameUtils{
         timerText.setAnchor(Anchor.TopRight);
         Timer.text = timerText;
 
-        List<Component> textElements = Arrays.asList(satisfactionText, /*notifText1,*/ notifText2, buildingCounterText,
+        List<Component> textElements = Arrays.asList(satisfactionText, moneyText, buildingCounterText,
             accommodationCount, studyCount, cafeCount, relaxCount, restaurantCount, timerText);
 
         // Add all text to the drawQueue

@@ -1,53 +1,101 @@
 package CampusTycoon.UI;
 
-import CampusTycoon.TextInput;
+import CampusTycoon.GameLogic.Timer;
 import CampusTycoon.UI.Components.Button;
+import CampusTycoon.UI.Components.Leaderboard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import CampusTycoon.GameUtils;
 import CampusTycoon.InputHandler;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
+import java.io.IOException;
 
 
 public class saveScreen implements Screen, TextField.TextFieldListener {
 
-    //will turn true when on save screen
-    public static boolean isOnSaveScreen = false;
 
 
-    Stage stage;
+
+    public static Stage stage;
     private SpriteBatch batch;
-
+    public static int timerd;
+    public static TextField nameField;
+    private Label label;
     /** Screen that appears when the leaderboard is selected */
     public saveScreen() {
-    }
 
-    @Override
-    public void show() {
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+        //Assessment2
+        //Create new stage for UI and overwrite the multiplexer to allow
+        //Input to the text box
+        //stage = new Stage(new ScreenViewport());
+
+
+
+        //Main.multiplexer.addProcessor(stage);
+        // Gdx.input.setInputProcessor(Main.multiplexer);
         batch = new SpriteBatch();
         Skin skin = new Skin(Gdx.files.internal("Skins/uiskin.json"));
-        TextField nameField = new TextField("text",skin);
-        nameField.setPosition(0,0);
+        nameField = new TextField("Name",skin);
+
         nameField.setSize(250,65);
+
+        nameField.setPosition(Gdx.graphics.getWidth()/2f -nameField.getWidth()/2f,Gdx.graphics.getHeight()/2f);
+        nameField.setMaxLength(20);
+
+
+
+
+
+
+
+
+        label = new Label("Enter Name",skin);
+        label.setColor(Color.BLACK);
+        label.setPosition(Gdx.graphics.getWidth()/2f -label.getWidth()/2f -80f,Gdx.graphics.getHeight()/2f+70f);
+
         stage.addActor(nameField);
+        stage.addActor(label);
+        label.setVisible(false);
+        nameField.setVisible(false);
+        System.out.println("savescreen create");
+    }
+
+    public static String getText(){
+        return nameField.getText();
+    }
+    @Override
+    public void show() {
+        label.setVisible(true);
+        nameField.setVisible(true);
+
+        System.out.println(Gdx.input.getInputProcessor()+"PROCESSOR");
+        //Load leaderboard so we can edit it
+        try {
+            Leaderboard.loadLeaderboard();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //if stage == null create ui
+    if(stage == null){
 
 
-        isOnSaveScreen = true;
+    }
+
+
+
+
         System.out.println("Show save input");
-       new TextInput();
 
-        Button buttonMainMenu = new Button("Main Menu.png", 0, -300, 262, 66);
-        buttonMainMenu.setClickAction(Component.Actions.OpenStartScreen);
+
+        Button buttonMainMenu = new Button("Save Score.png", 0, -300, 262, 66);
+        buttonMainMenu.setClickAction(Component.Actions.OpenLeaderboardFromSave);
         buttonMainMenu.setAnchor(Component.Anchor.Centre);
         Drawer.add(1, buttonMainMenu);
         InputHandler.add(buttonMainMenu);
@@ -60,13 +108,13 @@ public class saveScreen implements Screen, TextField.TextFieldListener {
         ScreenUtils.clear(Color.WHITE);
         Drawer.drawAll();
 
-        System.out.println("draw");
+
 
 
         stage.act(delta);
         stage.draw();
 
-       
+
     }
 
     @Override
@@ -85,6 +133,18 @@ public class saveScreen implements Screen, TextField.TextFieldListener {
 
     @Override
     public void hide() {
+
+       // Leaderboard.updateScore(nameField.get());
+
+        label.setVisible(false);
+        nameField.setVisible(false);
+        Leaderboard.updateScore(nameField.getText(), Timer.score);
+        nameField.setText("Name");
+        try {
+            Leaderboard.saveLeaderboard();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         // This method is called when another screen replaces this one.
         Drawer.clear();
         InputHandler.clear();

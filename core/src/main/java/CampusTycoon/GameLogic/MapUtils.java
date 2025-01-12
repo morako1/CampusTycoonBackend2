@@ -54,10 +54,14 @@ public class MapUtils {
 					newPos.y + newBuilding.height - 1 >= b.y && newPos.y < b.y + Building.height) {
 				return false;
 			}
+
 			// If the game is paused do not allow placement
 			if (!isRunning) {
 				return false;
 			}
+
+
+
 
 		}
 		// Checks if the position of the new building would overlap with water or
@@ -80,6 +84,22 @@ public class MapUtils {
 		}
 		return true;
 	}
+
+
+    public boolean canAffordBuilding(int cost){
+
+
+
+
+        if( Money.getMoney() -cost >=0){
+            System.out.println("decrease"+cost);
+            Money.decreaseMoney(cost);
+            return true;
+        }
+        else{ return false;}
+
+    }
+
 
 	public boolean tileHasBuilding(Coordinate tile) {
 		for (Building building : map.buildings) {

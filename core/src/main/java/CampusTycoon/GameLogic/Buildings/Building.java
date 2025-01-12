@@ -10,13 +10,13 @@ public class Building {
 	public MapBuilding drawInfo;
 	public Coordinate position;
 	public int width, height;
-	
+	public int cost;
 	public Building() {
 		width = 1;
 		height = 1;
 		position = new Coordinate(0, 0);
 		drawInfo = new MapBuilding(
-			"MissingTexture.png", 
+			"MissingTexture.png",
 			position.x, position.y);
 		drawInfo.setAnchor(Anchor.BottomLeft);
 	}
@@ -25,7 +25,7 @@ public class Building {
 		height = 1;
 		position = Position;
 		drawInfo = new MapBuilding(
-			"MissingTexture.png", 
+			"MissingTexture.png",
 			position.x, position.y);
 		drawInfo.setAnchor(Anchor.BottomLeft);
 	}
@@ -34,18 +34,18 @@ public class Building {
 		width = Width;
 		height = Height;
 		drawInfo = new MapBuilding(
-			ImagePath, 
-			position.x, position.y, 
+			ImagePath,
+			position.x, position.y,
 			Width, Height);
 		drawInfo.setAnchor(Anchor.BottomLeft);
 	}
-	
-	
+
+
 	public void setPosition(Coordinate Position) {
 		position = Position;
 		drawInfo.setGridCoordinates(position.x, position.y);
 	}
-	
+
 	public void incrementBuildingCounter() {
 		BuildingCounter.increaseBuildingCounter(buildingName, 1);
 	}
