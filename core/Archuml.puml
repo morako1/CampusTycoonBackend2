@@ -32,7 +32,7 @@ package CampusTycoon {
             +void render()
         }
 
-    'TODO: the building class folder  '
+        'TODO: the building class folder  '
         package Building {
             class Building extends Coordinate {
                 -Coordinate position
@@ -61,7 +61,7 @@ package CampusTycoon {
             class SpaceStation extends Building {
             }
         }
-
+        'TODO: the Events class folder  '
         package Event {
             class Event {
                 +EventPopup eventUI
@@ -72,6 +72,7 @@ package CampusTycoon {
                 +List<String> choiceText
                 +String resultText
                 +int choice
+                +Event()
                 +void UI()
                 +void chooseOption(int option)
                 +void Option1()
@@ -79,14 +80,44 @@ package CampusTycoon {
                 +void End()
                 +void applyEffects()
             }
+            class CatEvent extends Event {
+                +CatEvent()
+                +void applyEffects()
+
+            }
+
+            class DonateEvent extends Event {
+                +StrikeEvent()
+                +void applyEffects()
+            }
+
 
             class StrikeEvent extends Event {
+                +StrikeEvent()
+                +void applyEffects()
             }
 
             enum EventsEnum {
-                STRIKE, VIRUS
+                STRIKE, DONATE,CAT
             }
         }
+
+        'TODO: the Tiles class folder  '
+        package Tiles {
+
+            class Grass implements Tile {
+            }
+            class Lake implements Tile  {
+            }
+
+            class Mountain implements Tile {
+            }
+            interface Tile {
+                +int getTileID()
+                +Coordinate getCoordinates()
+            }
+        }
+
         class BuildingCounter {
             -int buildingCount
             +int getBuildingCount()
@@ -96,25 +127,29 @@ package CampusTycoon {
 
         }
 
-
-       
         class Coordinate {
             +int x
             +int y
             +Coordinate(int x, int y)
             +Coordinate()
-            +CoordinatePair getPair()
+            +double distance(Coordinate point)
         }
 
-        class CoordinatePair {
+
+        class CoordinatePair extends Coordinate {
+            +Coordinate start
+            +Coordinate end
+            +CoordinatePair(Coordinate start, Coordinate end)
         }
 
         class Map {
-            -List<Building> buildings
-            -BuildingDisplay buildingDisplay
-            -MapUtils mapUtils
-            -boolean placing
-            -String placementType
+            +static String defaultMap = "York.txt"
+            +List<Building> buildings
+            +BuildingDisplay buildingDisplay
+            +MapUtils mapUtils
+            +boolean placing
+            +String placementType
+            +Map()
             +void toggleBuildingPlacement(String building)
             +void placeBuilding(Coordinate position)
         }
@@ -130,27 +165,102 @@ package CampusTycoon {
             +Tile getTile(int tileID)
         }
 
-        class SatisfactionMeter {
+        class SatisfactionMeter extends Component {
+            -int satisfaction
+            -int newscore
+            -int maxSatisfaction
+            +int getSatisfactionScore()
+            +void increaseSatisfactionScore(int satisfactionScore)
+            +void decreaseSatisfactionScore(int satisfactionScore)
+            +void setSatisfactionScoreScore(int satisfactionScore)
         }
 
-        package Tiles {
-            class Tiles {
-            }
-        }
+
 
         class Timer {
-            +static boolean isRunning
-            +static float getTimeRemaining()
-            +static void pause()
-            +static void resume()
+            -float timeRemaining
+            +Timer(float initialTime)
+            +void start()
+            +void update(float deltaTime)
+            +void pause()
+            +boolean hasEnded()
+            +float getTimeRemaining()
         }
 
+        class TimerTest{
+            +void updateShouldDecreaseTimeRemaining()
+            +void updateShouldEndWhenTimeUp()
+            +void updateShouldNotChangeTimeRemainingWhenPaused()
+            +void updateShouldNotEndWhenPausedAndTimeUp()
+
+        }
+        'TODO: the link for the Timer class'
+        TimerTest --> Timer
+
         class York {
+            +String mapData
         }
     }
 
 
     package UI {
+
+        package Components {
+            class Button extends Component {
+                +button(float X, float Y, float Width, float Height, String ImagePath)
+                +button(float X, float Y, float Width, float Height)
+                +int value
+                +void setClickAction(String Action)
+
+            }
+
+            class MapBuilding extends Component {
+                -float gridBaseWidth
+                -float gridBaseHeight
+                -float gridX
+                -float gridY
+
+                +MapBuilding()
+                +void setGridCoordinates(int X, int Y)
+                +void applyZoomOffset()
+            }
+
+            class MapTile extends Component {
+                +int mapHeight
+                +int gridX
+                +int gridY
+                +void applyZoomOffset()
+            }
+        }
+
+        package Systems {
+            class Window {
+                +static void updateResolution(int width, int height)
+            }
+
+            class BuildingDisplay {
+                -List<Building> buildings
+                +BuildingDisplay(List<Building> Buildings)
+                +void drawBuildings()
+            }
+
+            class MapDisplay {
+
+                -Map map
+                -List<MapTile> mapTile
+                +SpriteSheet spriteSheet
+                +void drawMap()
+            }
+
+            class EventPopup {
+                +Event event
+                +List<Component> elements
+                +List<Component> buttonElements
+                +void initialise()
+                +void close()
+            }
+        }
+
         class Camera {
         }
 
@@ -191,34 +301,6 @@ package CampusTycoon {
             +void setWidth(float width)
             +void setClickAction(String action)
             +void setOffset(float X, float Y)
-        }
-
-        package Components {
-            class Button extends Component {
-                +button(float X, float Y, float Width, float Height, String ImagePath)
-                +button(float X, float Y, float Width, float Height)
-                +int value
-                +void setClickAction(String Action)
-
-            }
-
-            class MapBuilding extends Component {
-                -float gridBaseWidth
-                -float gridBaseHeight
-                -float gridX
-                -float gridY
-
-                +MapBuilding()
-                +void setGridCoordinates(int X, int Y)
-                +void applyZoomOffset()
-            }
-
-            class MapTile extends Component {
-                +int mapHeight
-                +int gridX
-                +int gridY
-                +void applyZoomOffset()
-            }
         }
 
         class Drawer {
@@ -291,33 +373,9 @@ package CampusTycoon {
         class StartScreen {
         }
 
-        package Systems {
-            class Window {
-                +static void updateResolution(int width, int height)
-            }
-
-            class BuildingDisplay {
-                -List<Building> buildings
-                +BuildingDisplay(List<Building> Buildings)
-                +void drawBuildings()
-            }
-
-            class MapDisplay {
-
-                -Map map
-                -List<MapTile> mapTile
-                +SpriteSheet spriteSheet
-                +void drawMap()
-            }
-
-            class EventPopup {
-                +Event event
-                +List<Component> elements
-                +List<Component> buttonElements
-                +void initialise()
-                +void close()
-            }
+        class Window {
         }
+
     }
 }
 
