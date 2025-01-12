@@ -141,11 +141,13 @@ package CampusTycoon {
         }
 
         class Map {
-            -List<Building> buildings
-            -BuildingDisplay buildingDisplay
-            -MapUtils mapUtils
-            -boolean placing
-            -String placementType
+            +static String defaultMap = "York.txt"
+            +List<Building> buildings
+            +BuildingDisplay buildingDisplay
+            +MapUtils mapUtils
+            +boolean placing
+            +String placementType
+            +Map()
             +void toggleBuildingPlacement(String building)
             +void placeBuilding(Coordinate position)
         }
@@ -161,7 +163,14 @@ package CampusTycoon {
             +Tile getTile(int tileID)
         }
 
-        class SatisfactionMeter {
+        class SatisfactionMeter extends Component {
+            -int satisfaction
+            -int newscore
+            -int maxSatisfaction
+            +int getSatisfactionScore()
+            +void increaseSatisfactionScore(int satisfactionScore)
+            +void decreaseSatisfactionScore(int satisfactionScore)
+            +void setSatisfactionScoreScore(int satisfactionScore)
         }
 
 
