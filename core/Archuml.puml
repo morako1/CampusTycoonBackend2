@@ -32,7 +32,7 @@ package CampusTycoon {
             +void render()
         }
 
-    'TODO: the building class folder  '
+        'TODO: the building class folder  '
         package Building {
             class Building extends Coordinate {
                 -Coordinate position
@@ -61,7 +61,7 @@ package CampusTycoon {
             class SpaceStation extends Building {
             }
         }
-    'TODO: the Events class folder  '
+        'TODO: the Events class folder  '
         package Event {
             class Event {
                 +EventPopup eventUI
@@ -83,13 +83,14 @@ package CampusTycoon {
             class CatEvent extends Event {
                 +CatEvent()
                 +void applyEffects()
-            
+
             }
 
             class DonateEvent extends Event {
                 +StrikeEvent()
                 +void applyEffects()
-            }    
+            }
+
 
             class StrikeEvent extends Event {
                 +StrikeEvent()
@@ -101,13 +102,14 @@ package CampusTycoon {
             }
         }
 
-    'TODO: the Tiles class folder  '
+        'TODO: the Tiles class folder  '
         package Tiles {
 
             class Grass implements Tile {
             }
             class Lake implements Tile  {
-            }            
+            }
+
             class Mountain implements Tile {
             }
             interface Tile {
@@ -115,7 +117,7 @@ package CampusTycoon {
                 +Coordinate getCoordinates()
             }
         }
-        
+
         class BuildingCounter {
             -int buildingCount
             +int getBuildingCount()
@@ -131,9 +133,9 @@ package CampusTycoon {
             +Coordinate(int x, int y)
             +Coordinate()
             +double distance(Coordinate point)
-            }
-    
-        
+        }
+
+
         class CoordinatePair extends Coordinate {
             +Coordinate start
             +Coordinate end
@@ -176,22 +178,33 @@ package CampusTycoon {
 
 
         class Timer {
-            +static boolean isRunning
-            +static float getTimeRemaining()
-            +static void pause()
-            +static void resume()
+            -float timeRemaining
+            +Timer(float initialTime)
+            +void start()
+            +void update(float deltaTime)
+            +void pause()
+            +boolean hasEnded()
+            +float getTimeRemaining()
         }
 
-        class TimerTest{}
+        class TimerTest{
+            +void updateShouldDecreaseTimeRemaining()
+            +void updateShouldEndWhenTimeUp()
+            +void updateShouldNotChangeTimeRemainingWhenPaused()
+            +void updateShouldNotEndWhenPausedAndTimeUp()
+
+        }
+        'TODO: the link for the Timer class'
+        TimerTest --> Timer
 
         class York {
-            +static final String RawMap
+            +String mapData
         }
     }
 
 
     package UI {
-       
+
         package Components {
             class Button extends Component {
                 +button(float X, float Y, float Width, float Height, String ImagePath)
@@ -219,7 +232,7 @@ package CampusTycoon {
                 +void applyZoomOffset()
             }
         }
-        
+
         package Systems {
             class Window {
                 +static void updateResolution(int width, int height)
@@ -248,7 +261,7 @@ package CampusTycoon {
             }
         }
 
- class Camera {
+        class Camera {
         }
 
         class Component {
