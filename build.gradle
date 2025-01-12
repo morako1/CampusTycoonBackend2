@@ -11,6 +11,7 @@ buildscript {
   dependencies {
 
 
+
   }
 }
 
@@ -63,7 +64,8 @@ subprojects {
     mavenCentral()
     maven { url 'https://s01.oss.sonatype.org' }
     // You may want to remove the following line if you have errors downloading dependencies.
-    mavenLocal()
+    //mavenLocal()
+    maven { url 'https://mvnrepository.com/artifact/com.badlogicgames.gdx/gdx-backend-headless'}
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
     maven { url 'https://jitpack.io' }
