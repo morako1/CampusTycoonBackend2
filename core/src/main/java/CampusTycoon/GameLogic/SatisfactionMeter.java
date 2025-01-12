@@ -156,7 +156,7 @@ public class SatisfactionMeter {
 
         }
 
-        System.out.println(counter + "Building:");
+
         increaseSatisfactionScore(counter);
 
 
@@ -184,11 +184,11 @@ public class SatisfactionMeter {
         }
 
 
-        //There is no study area within 35
 
-        System.out.println(100 - (accommodationCounter*25) + "accomcount:");
 
-        int checkvalue = 200 - (accommodationCounter*40);
+
+
+        int checkvalue = 3200 - (accommodationCounter*640);
         if (checkvalue<0){
 
             decreaseSatisfactionScore(Math.abs(checkvalue));

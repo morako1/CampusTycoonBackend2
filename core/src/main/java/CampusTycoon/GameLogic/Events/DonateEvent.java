@@ -1,5 +1,7 @@
 package CampusTycoon.GameLogic.Events;
 
+import CampusTycoon.GameLogic.Money;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,7 +13,7 @@ public class DonateEvent extends Event {
 
 
         eventText= "A group of successful alumni decide\nthey want to donate to the school\n\nDo you accept their donation?";
-        acceptText = "You accept their donation graciously\n\n+$100";
+        acceptText = "You accept their donation graciously\n\n+$750";
         rejectText="For some reason, you decided to reject\nthe donation";
         choiceText= new ArrayList<String>(Arrays.asList(
             "Accept","Reject"));
@@ -24,7 +26,7 @@ public class DonateEvent extends Event {
         //accept
         if(choice  ==1 ){
 
-            System.out.println("accept effect");
+            Money.increaseMoney(750);
 
         }
         //reject

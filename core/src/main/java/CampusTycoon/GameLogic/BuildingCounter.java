@@ -46,6 +46,18 @@ public class BuildingCounter {
 		}
 	}
 
+
+
+    public static void updateDisplay() {
+        if (UI.isEmpty()) {
+            return;
+        }
+
+
+        totalCountUI.text = String.valueOf(totalBuildingCount);
+        totalCountUI.update();
+    }
+
 	public static void increaseBuildingCounter(String building, int value) {
 		buildingCounts[getBuildingCountIndex(building)] += value;
 		increaseBuildingCounter(value);
@@ -58,10 +70,12 @@ public class BuildingCounter {
 
 	public static void increaseBuildingCounter(int value) {
 		totalBuildingCount += value;
+        updateDisplay();
 	}
 
 	public static void decreaseBuildingCounter(int value) {
 		totalBuildingCount -= value;
+        updateDisplay();
 	}
 
 }

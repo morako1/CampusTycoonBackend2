@@ -50,7 +50,10 @@ public class Map {
 		if (!placing) {
 			return; // Placement mode currently toggled off
 		}
-
+        if (mapUtils.outsideMap(position)) {
+            // Tried to place a building in the void, so places a space station instead
+            return;
+        }
 		Building building = MapUtils.getBuilding(placementType);
 
 		building.setPosition(position);
@@ -65,10 +68,7 @@ public class Map {
         }
 
 
-		if (mapUtils.outsideMap(position)) {
-			// Tried to place a building in the void, so places a space station instead
-			building = new SpaceStation(position);
-		}
+
 
 		// Else if placing and building location valid:
 		buildings.add(building);

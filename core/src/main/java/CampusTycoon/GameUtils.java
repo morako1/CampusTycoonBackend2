@@ -97,7 +97,7 @@ public class GameUtils{
     }
 
     public static void createGameplayUI() {
-        Button buttonAccommodation = new Button("Buildings\\Accommodation.png", -500, 10, 90, 66);
+        Button buttonAccommodation = new Button("Buildings\\Accommodation.png", -410, 10, 90, 66);
         buttonAccommodation.setClickAction(Actions.ToggleAccommodationBuilding);
         buttonAccommodation.setAnchor(Anchor.BottomCentre);
 
@@ -108,46 +108,46 @@ public class GameUtils{
 
         MenuText accommodationCount = new MenuText(
             String.valueOf("Housing"),
-            -550, 110, 2f, 2f);
+            -460, 110, 2f, 2f);
         accommodationCount.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(accommodationCount);
 
-        Button buttonStudy = new Button("Buildings\\Study.png", -300, 10, 90, 66);
+        Button buttonStudy = new Button("Buildings\\Study.png", -210, 10, 90, 66);
         buttonStudy.setClickAction(Actions.ToggleStudyBuilding);
         buttonStudy.setAnchor(Anchor.BottomCentre);
 
         MenuText studyCount = new MenuText(
             String.valueOf("Study"),
-            -350, 110, 2f, 2f);
+            -250, 110, 2f, 2f);
         studyCount.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(studyCount);
 
-        Button buttonCafe = new Button("Buildings\\Cafeteria.png", -100, 10, 90, 66);
+        Button buttonCafe = new Button("Buildings\\Cafeteria.png", -10, 10, 90, 66);
         buttonCafe.setClickAction(Actions.ToggleCafeteriaBuilding);
         buttonCafe.setAnchor(Anchor.BottomCentre);
 
         MenuText cafeCount = new MenuText(
             String.valueOf("Cafe"),
-            -140, 110, 2f, 2f);
+            -45, 110, 2f, 2f);
         cafeCount.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(cafeCount);
 
-        Button buttonRelax = new Button("Buildings\\Relaxation.png", 100, 10, 90, 66);
+        Button buttonRelax = new Button("Buildings\\Relaxation.png", 190, 10, 90, 66);
         buttonRelax.setClickAction(Actions.ToggleRelaxationBuilding);
         buttonRelax.setAnchor(Anchor.BottomCentre);
 
         MenuText relaxCount = new MenuText(
             String.valueOf("Park"),
-            50, 110, 2f, 2f);
+            160, 110, 2f, 2f);
         relaxCount.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(relaxCount);
 
-        Button buttonRestaurant = new Button("Buildings\\Restaurant.png", 300, 10, 90, 66);
+        Button buttonRestaurant = new Button("Buildings\\Restaurant.png", 390, 10, 90, 66);
         buttonRestaurant.setClickAction(Actions.ToggleRestaurantBuilding);
         buttonRestaurant.setAnchor(Anchor.BottomCentre);
 
         MenuText restaurantCount = new MenuText(
-            String.valueOf("Restaurant"), 250, 110, 2f, 2f);
+            String.valueOf("Restaurant"), 330, 110, 2f, 2f);
         restaurantCount.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(restaurantCount);
 
@@ -156,20 +156,20 @@ public class GameUtils{
         //Assessment2
         //Display costs on UI
         MenuText restaurantCost = new MenuText(
-            String.valueOf("40"), 280, 140, 2f, 2f);
+            String.valueOf("40"), 370, 140, 2f, 2f);
         restaurantCost.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(restaurantCost);
 
         MenuText relaxCost= new MenuText(
             String.valueOf("50"),
-            75, 140, 2f, 2f);
+            175, 140, 2f, 2f);
         relaxCost.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(relaxCost);
 
 
         MenuText accommodationCost = new MenuText(
             String.valueOf("50"),
-            -520, 140, 2f, 2f);
+            -425, 140, 2f, 2f);
         accommodationCost.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(accommodationCost);
 
@@ -178,7 +178,7 @@ public class GameUtils{
 
         MenuText studyCost = new MenuText(
             String.valueOf("50"),
-            -320, 140, 2f, 2f);
+            -230, 140, 2f, 2f);
         studyCost.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(studyCost);
 
@@ -186,15 +186,14 @@ public class GameUtils{
 
         MenuText cafeCost = new MenuText(
             String.valueOf("30"),
-            -125, 140, 2f, 2f);
+            -35, 140, 2f, 2f);
         cafeCost.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(cafeCost);
 
 
 
 
-        Button buttonPH6 = new Button("Placeholder.png", 500, 10, 90, 66);
-        buttonPH6.setAnchor(Anchor.BottomCentre);
+
 
         Button buttonDollar = new Button("Dollar.png", -300, 0, 70, 66);
         buttonDollar.setAnchor(Anchor.TopCentre);
@@ -220,7 +219,7 @@ public class GameUtils{
         buttonSatisfaction.setAnchor(Anchor.TopRight);
 
         List<Component> UIButtons = Arrays.asList(
-            buttonAccommodation, buttonStudy, buttonCafe, buttonRelax, buttonRestaurant, buttonPH6,
+            buttonAccommodation, buttonStudy, buttonCafe, buttonRelax, buttonRestaurant,
             /*notif2, notif1,*/ buttonPause, buttonSatisfaction,
             buttonDollar, buttonHouses, buttonPeople);
 
@@ -285,6 +284,7 @@ public class GameUtils{
 
     //(Assessment 2) This will tell the user the effects of their choice
     public static void EventResultPopup(){
+        Timer.popUp=true;
         Timer.isRunning = false;
 
 
@@ -375,6 +375,19 @@ public class GameUtils{
     }
 
     public static void createEndScreenUI() {
+
+
+        MenuText achievementsTitle = new MenuText("Achievements Achieved:",240,240,2f,2f);
+
+        achievementsTitle.setAnchor(Anchor.Centre);
+
+
+        MenuText achievementsText = new MenuText(Achievements.GetAchievements(),180,170,2f,2f);
+
+        System.out.println(Achievements.GetAchievements()+"achieced achievemnts");
+        achievementsText.setAnchor(Anchor.Centre);
+
+
         Button buttonSaveScore = new Button("Save Score.png", 0, 90, 262, 66);
         buttonSaveScore.setClickAction(Actions.OpenSaveScreen);
         buttonSaveScore.setAnchor(Anchor.Centre);
@@ -394,7 +407,7 @@ public class GameUtils{
         List<Component> endScreenButtonList = Arrays.asList(
             buttonSaveScore,
             buttonMainMenu,
-            buttonNewGame);
+            buttonNewGame,achievementsTitle,achievementsText);
 
         // Add all buttons to the drawQueue
         for (Component button : endScreenButtonList) {

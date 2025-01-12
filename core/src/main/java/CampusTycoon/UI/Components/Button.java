@@ -91,7 +91,7 @@ public class Button extends Component {
 	}
 
     protected static void EndEvent(Boolean isAction) {
-
+        Timer.popUp = false;
         Timer.isRunning = true;
 
 

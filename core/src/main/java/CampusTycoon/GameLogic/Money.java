@@ -8,7 +8,7 @@ public class Money {
 
 
     public static Component MoneyText;
-    private static int money = 1000;
+    private static int money = 2000;
 
 
 

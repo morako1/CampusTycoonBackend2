@@ -27,6 +27,7 @@ public abstract class Event {
 
     public Event(){
 
+        Timer.popUp = true;
         Timer.isRunning = false;
     }
 
@@ -61,6 +62,7 @@ public abstract class Event {
 	// Temporary choice implementations, will change to abstract functions later (as each individual event should decide what the outcome of choices are)
 	public void Option1(){
 
+        Timer.popUp = false;
         Timer.isRunning = true;
 
         resultText = acceptText;
@@ -70,6 +72,7 @@ public abstract class Event {
 
     };
 	public void Option2() {
+        Timer.popUp = false;
         Timer.isRunning = true;
 
         resultText = rejectText;

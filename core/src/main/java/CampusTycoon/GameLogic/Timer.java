@@ -17,6 +17,8 @@ public class Timer{
 	public static MenuText text;
     private static float timeRemaining;
     public static boolean isRunning;
+    public static boolean popUp;
+
     private boolean hasEnded;
     public static ArrayList<EventsEnum> eventQueue;
     public static float nextEvent;
@@ -42,13 +44,22 @@ public class Timer{
 
         Random random = new Random();
         nextEvent = 300f -(random.nextInt((61))+20);
-
+        BuildingCounter.reset();
+        SatisfactionMeter.resetSatisfactionScore();
+        Money.resetMoney();
+        Money.increaseMoney(2000);
+        SatisfactionMeter.resetSatisfactionScore();
 
         isRunning = true;
         hasEnded = false; // Reset if the timer is restarted
     }
 
     public static void pause() {
+        if (popUp) {
+            return;
+        }
+
+
         isRunning = !isRunning;
 
     }
@@ -139,9 +150,9 @@ public class Timer{
 
             Drawer.clear();
             score = getSatisfactionScore();
-            resetSatisfactionScore();
+
             ScreenUtils.OpenEndScreen();
-			BuildingCounter.reset();
+
         }
     }
 
