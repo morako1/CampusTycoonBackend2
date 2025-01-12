@@ -9,10 +9,10 @@ public class Relaxation extends Building {
 	public static int width = 3, height = 3;
     public static int cost = 50;
 	public Relaxation(Coordinate Position) {
-		super(Position, defaultImage, width , height);
+		super(Position, defaultImage,cost, width , height);
 	}
 	public Relaxation() {
-		super(new Coordinate(0, 0), defaultImage, width , height);
+		super(new Coordinate(0, 0), defaultImage,cost, width , height);
 	}
 
 

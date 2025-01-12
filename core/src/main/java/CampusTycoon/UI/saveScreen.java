@@ -139,7 +139,7 @@ public class saveScreen implements Screen, TextField.TextFieldListener {
         label.setVisible(false);
         nameField.setVisible(false);
         Leaderboard.updateScore(nameField.getText(), Timer.score);
-        nameField.setText("Name");
+        nameField.setMessageText("Name");
         try {
             Leaderboard.saveLeaderboard();
         } catch (IOException e) {

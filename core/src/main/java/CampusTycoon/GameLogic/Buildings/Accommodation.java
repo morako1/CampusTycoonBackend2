@@ -9,10 +9,10 @@ public class Accommodation extends Building {
 	public static int width = 3, height = 3;
     public static int cost = 50;
 	public Accommodation(Coordinate Position) {
-		super(Position, defaultImage, width , height);
+		super(Position, defaultImage,cost, width , height);
 	}
 	public Accommodation() {
-		super(new Coordinate(0, 0), defaultImage, width , height);
+		super(new Coordinate(0, 0), defaultImage,cost, width , height);
 	}
 
 

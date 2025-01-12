@@ -10,7 +10,7 @@ public class SpaceStation extends Building {
 	public static int width = 2, height = 2;
     public static int cost = 0;
 	public SpaceStation(Coordinate Position) {
-		super(Position, defaultImage, width, height);
+		super(Position, defaultImage,cost, width, height);
 	}
 
 

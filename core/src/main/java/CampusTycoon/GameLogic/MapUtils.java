@@ -44,6 +44,7 @@ public class MapUtils {
 	}
 
 	public boolean buildingPlaceable(Building newBuilding) {
+
 		for (Building Building : map.buildings) {
 			Coordinate b = Building.position;
 			Coordinate newPos = newBuilding.position;
@@ -92,7 +93,7 @@ public class MapUtils {
 
 
         if( Money.getMoney() -cost >=0){
-            System.out.println("decrease"+cost);
+
             Money.decreaseMoney(cost);
             return true;
         }

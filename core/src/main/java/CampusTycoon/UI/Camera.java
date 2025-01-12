@@ -180,8 +180,7 @@ public class Camera {
 		hoverDisplay.drawInfo.setOffset(x, y);
 		hoverDisplay.drawInfo.setScale(1f / zoom);
 		hoverDisplay.drawInfo.applyZoomOffset();
-		System.out.println(hoverDisplay.drawInfo.scale);
-		System.out.println(hoverDisplay.drawInfo.baseWidth);
+
 	}
 
 	// For debug purposes

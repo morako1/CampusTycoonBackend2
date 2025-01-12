@@ -10,10 +10,10 @@ public class Cafeteria extends Building {
     public static int cost = 30;
 
 	public Cafeteria(Coordinate Position) {
-		super(Position, defaultImage, width , height);
+		super(Position, defaultImage,cost, width , height);
 	}
 	public Cafeteria() {
-		super(new Coordinate(0, 0), defaultImage, width , height);
+		super(new Coordinate(0, 0), defaultImage,cost, width , height);
 	}
 
 

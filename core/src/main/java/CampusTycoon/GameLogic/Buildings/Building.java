@@ -29,10 +29,11 @@ public class Building {
 			position.x, position.y);
 		drawInfo.setAnchor(Anchor.BottomLeft);
 	}
-	protected Building(Coordinate Position, String ImagePath, int Width, int Height) {
+	protected Building(Coordinate Position, String ImagePath,int Cost, int Width, int Height) {
 		position = Position;
 		width = Width;
 		height = Height;
+        cost = Cost;
 		drawInfo = new MapBuilding(
 			ImagePath,
 			position.x, position.y,

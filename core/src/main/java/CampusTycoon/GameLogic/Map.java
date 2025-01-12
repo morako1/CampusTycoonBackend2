@@ -6,6 +6,7 @@ import java.util.Random;
 
 import CampusTycoon.GameLogic.Buildings.*;
 import CampusTycoon.GameLogic.Tiles.*;
+import CampusTycoon.GameUtils;
 import CampusTycoon.UI.Drawer;
 import CampusTycoon.UI.Systems.BuildingDisplay;
 import CampusTycoon.UI.Systems.MapDisplay;
@@ -51,6 +52,7 @@ public class Map {
 		}
 
 		Building building = MapUtils.getBuilding(placementType);
+
 		building.setPosition(position);
 		if (!mapUtils.buildingPlaceable(building)) {
 			return; // Building location invalid
@@ -73,6 +75,7 @@ public class Map {
 		Drawer.add(-1, building.drawInfo);
 
 		building.incrementBuildingCounter(); // Number go up (by 1)
-		SatisfactionMeter.increaseSatisfactionScore(5); // Placing buildings satisfies students!!!
+		//SatisfactionMeter.increaseSatisfactionScore(5); // Placing buildings satisfies students!!!
+        SatisfactionMeter.calculateSatisfaction();
 	}
 }

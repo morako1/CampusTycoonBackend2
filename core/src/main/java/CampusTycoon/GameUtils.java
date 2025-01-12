@@ -128,7 +128,7 @@ public class GameUtils{
 
         MenuText cafeCount = new MenuText(
             String.valueOf("Cafe"),
-            -150, 110, 2f, 2f);
+            -140, 110, 2f, 2f);
         cafeCount.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(cafeCount);
 
@@ -150,6 +150,48 @@ public class GameUtils{
             String.valueOf("Restaurant"), 250, 110, 2f, 2f);
         restaurantCount.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(restaurantCount);
+
+
+
+        //Assessment2
+        //Display costs on UI
+        MenuText restaurantCost = new MenuText(
+            String.valueOf("40"), 280, 140, 2f, 2f);
+        restaurantCost.setAnchor(Anchor.BottomCentre);
+        BuildingCounter.UI.add(restaurantCost);
+
+        MenuText relaxCost= new MenuText(
+            String.valueOf("50"),
+            75, 140, 2f, 2f);
+        relaxCost.setAnchor(Anchor.BottomCentre);
+        BuildingCounter.UI.add(relaxCost);
+
+
+        MenuText accommodationCost = new MenuText(
+            String.valueOf("50"),
+            -520, 140, 2f, 2f);
+        accommodationCost.setAnchor(Anchor.BottomCentre);
+        BuildingCounter.UI.add(accommodationCost);
+
+
+
+
+        MenuText studyCost = new MenuText(
+            String.valueOf("50"),
+            -320, 140, 2f, 2f);
+        studyCost.setAnchor(Anchor.BottomCentre);
+        BuildingCounter.UI.add(studyCost);
+
+
+
+        MenuText cafeCost = new MenuText(
+            String.valueOf("30"),
+            -125, 140, 2f, 2f);
+        cafeCost.setAnchor(Anchor.BottomCentre);
+        BuildingCounter.UI.add(cafeCost);
+
+
+
 
         Button buttonPH6 = new Button("Placeholder.png", 500, 10, 90, 66);
         buttonPH6.setAnchor(Anchor.BottomCentre);
@@ -191,7 +233,7 @@ public class GameUtils{
         // Add all buttons to the InputHandler to allow for interaction handling
         InputHandler.add(UIButtons);
 
-        MenuText satisfactionText = new MenuText("", 50, 30, 2f, 2f);
+        MenuText satisfactionText = new MenuText("", 80, 30, 2f, 2f);
         satisfactionText.setAnchor(Anchor.TopRight);
         SatisfactionMeter.satisfactionText = satisfactionText;
         SatisfactionMeter.updateDisplay();
@@ -220,7 +262,7 @@ public class GameUtils{
         Timer.text = timerText;
 
         List<Component> textElements = Arrays.asList(satisfactionText, moneyText, buildingCounterText,
-            accommodationCount, studyCount, cafeCount, relaxCount, restaurantCount, timerText);
+            accommodationCount, studyCount, cafeCount, relaxCount, restaurantCount,restaurantCost,relaxCost,cafeCost,accommodationCost,studyCost, timerText);
 
         // Add all text to the drawQueue
         for (Component text : textElements) {
