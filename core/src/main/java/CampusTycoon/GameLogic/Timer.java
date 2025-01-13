@@ -8,6 +8,8 @@ import CampusTycoon.GameUtils;
 import CampusTycoon.UI.ScreenUtils;
 import CampusTycoon.UI.Components.MenuText;
 import CampusTycoon.UI.Drawer;
+import com.badlogic.gdx.Gdx;
+
 
 import java.util.*;
 import static CampusTycoon.GameLogic.SatisfactionMeter.getSatisfactionScore;
@@ -28,7 +30,7 @@ public class Timer{
 
     public Timer(float startTime) {
 
-
+      
         eventQueue = new ArrayList<EventsEnum>();
 
         eventQueue.addAll(Arrays.asList(EventsEnum.values()));
