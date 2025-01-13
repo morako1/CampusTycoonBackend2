@@ -1,0 +1,797 @@
+@startuml
+top to bottom direction
+skinparam linetype ortho
+package CampusTycoon {
+    package GameLogic {
+
+        class GameUtils {
+            +static void createEndScreenUI()
+            +static void createGameplayUI()
+            +static void createEventPopupUI(Event event)
+            +static void startGame()
+            +static void leaderboardUI()
+            +static void loadLeaderboard()
+            +static void createStartScreenUI()
+            +static void createSaveScreenUI()
+            +static void createLeaderboardScreenUI()
+        }
+        'TODO: the link for the GameUtils class'
+
+        GameUtils ..> Event : uses
+
+        class InputHandler implements InputProcessor {
+            -static final int LeftClick = 0
+            -static final int RightClick = 1
+            -static final int MiddleClick = 2
+            -static List<Component> clickables = new ArrayList<Component>()
+            -static boolean leftClickDown = false
+
+            +static void remove(Component component)
+            +static void clear()
+            +static void add(Component button)
+            +static void add(List<Component> buttons)
+        }
+        'TODO: the link for the InputHandler class'
+
+        InputHandler ..> Component : uses
+        InputHandler ..> Camera : uses
+        InputHandler ..> Window : uses
+
+        class Main extends Game {
+            +static InputMultiplexer multiplexer
+
+            +void create()
+        }
+        'TODO: the link for the Main class'
+
+        Main ..> InputMultiplexer : intializes
+        Main ..> saveScreen : intializes
+        Main ..> Stage : intializes
+        Main ..> ScreenViewport : intializes
+        Main ..> InputHandler : intializes
+        Main ..> Gdx : intializes
+        Main ..> Screen : intializes
+        Main ..> StartScreen : intializes
+        Main ..> ScreenUtils : intializes
+
+        'TODO: the building class folder  '
+        package Building {
+            class Building {
+                +static final String buildingName = "null"
+                +MapBuilding drawInfo
+                +Coordinate position
+                +int width
+                +int height
+                +int cost
+
+                +Building()
+                +Building(Coordinate Position)
+                +Building(Coordinate Position, String ImagePath, int Width, int Height)
+                +void setPosition(Coordinate Position)
+            }
+            'TODO: the link for the Building class'
+
+            Building ..> Coordinate : creates
+            Building ..> MapBuilding : creates
+            Building ..> Anchor : creates
+            Building ..> BuildingCounter : increments
+
+            class Accommodation extends Building {
+                +static final String defaultImage = "Buildings\\Accommodation.png"
+                +static final String buildingName = "Accommodation"
+                +static int width = 3
+                +static int height = 3
+                +static int cost = 50
+
+                +Accommodation(Coordinate Position)
+                +Accommodation()
+                +void incrementBuildingCounter()
+            }
+            'TODO: the link for the Accommodation class'
+
+            Accommodation ..> Coordinate : creates
+            Accommodation ..> BuildingCounter : increments
+
+            class Cafeteria extends Building {
+                +static final String defaultImage = "Buildings\\Cafeteria.png"
+                +static final String buildingName = "Cafeteria"
+                +static int width = 3
+                +static int height = 3
+                +static int cost = 30
+
+                +Cafeteria(Coordinate Position)
+                +Cafeteria()
+                +void incrementBuildingCounter()
+            }
+            'TODO: the link for the Cafeteria class'
+
+            Cafeteria ..> Coordinate : creates
+            Cafeteria ..> BuildingCounter : increments
+
+            class Relaxation extends Building {
+                +static final String defaultImage = "Buildings\\Relaxation.png"
+                +static final String buildingName = "Relaxation"
+                +static int width = 3
+                +static int height = 3
+                +static int cost = 50
+
+                +Relaxation(Coordinate Position)
+                +Relaxation()
+                +void incrementBuildingCounter()
+            }
+            'TODO: the link for the Relaxation class'
+
+            Relaxation ..> Coordinate : uses
+            Relaxation ..> BuildingCounter : uses
+
+            class Study extends Building {
+                +static final String defaultImage = "Buildings\\Study.png"
+                +static final String buildingName = "Study"
+                +static int width = 3
+                +static int height = 3
+                +static int cost = 50
+
+                +Study(Coordinate Position)
+                +Study()
+                +void incrementBuildingCounter()
+            }
+            'TODO: the link for the Study class'
+
+            Study ..> Coordinate : uses
+            Study ..> BuildingCounter : uses
+
+            class Restaurant extends Building {
+                +static final String defaultImage = "Buildings\\Restaurant.png"
+                +static final String buildingName = "Restaurant"
+                +static int width = 3
+                +static int height = 3
+                +static int cost = 40
+
+                +Restaurant(Coordinate Position)
+                +Restaurant()
+                +void incrementBuildingCounter()
+            }
+            'TODO: the link for the Restaurant class'
+
+            Restaurant ..> Coordinate : uses
+            Restaurant ..> BuildingCounter : uses
+
+            class SpaceStation extends Building {
+                +static final String defaultImage = "Buildings\\SpaceStation.png"
+                +static final String buildingName = "SpaceStation"
+                +static int width = 2
+                +static int height = 2
+                +static int cost = 0
+
+                +SpaceStation(Coordinate Position)
+                +void incrementBuildingCounter()
+            }
+            'TODO: the link for the SpaceStation class'
+
+            SpaceStation ..> Coordinate : uses
+        }
+        'TODO: the Events class folder  '
+        package Event {
+            class Event {
+                +EventPopup eventUI
+                +int choices
+                +String eventText
+                +String acceptText
+                +String rejectText
+                +List<String> choiceText
+                +String resultText
+                +int choice
+                +Event()
+                +void UI()
+                +void chooseOption(int option)
+                +void Option1()
+                +void Option2()
+                +void End()
+                +void applyEffects()
+            }
+            class CatEvent extends Event {
+                +CatEvent()
+                +void applyEffects()
+
+            }
+
+            class DonateEvent extends Event {
+                +StrikeEvent()
+                +void applyEffects()
+            }
+
+
+            class StrikeEvent extends Event {
+                +StrikeEvent()
+                +void applyEffects()
+            }
+
+            enum EventsEnum {
+                STRIKE, DONATE,CAT
+            }
+        }
+
+        'TODO: the Tiles class folder  '
+        package Tiles {
+
+            class Grass implements Tile {
+                +int getTileID()
+                +String debugMessage()
+            }
+            'TODO: the link for the Grass class'
+
+            Grass ..|> Tile
+
+            class Grass implements Tile {
+                +int getTileID()
+                +String debugMessage()
+            }
+            'TODO: the link for the Grass class'
+
+            Grass ..|> Tile
+
+            class Mountain implements Tile {
+                +int getTileID()
+                +String debugMessage()
+            }
+            'TODO: the link for the Mountain class'
+
+            Mountain ..|> Tile
+
+            interface Tile {
+                {static} +int SpriteSize = 64
+                {static} +int SpriteMapSize = 12
+
+                +int getTileID()
+                +Coordinate getSpriteCoords()
+                +String debugMessage()
+            }
+            'TODO: the link for the Tile interface'
+
+            Tile ..> Coordinate : uses
+        }
+
+        class BuildingCounter {
+            +static int getTotalBuildingCount()
+            +static int getBuildingCount(String building)
+            +static void increaseBuildingCounter(String building, int value)
+            +static void decreaseBuildingCounter(String building, int value)
+            +static void increaseBuildingCounter(int value)
+            +static void decreaseBuildingCounter(int value)
+
+            -static int getBuildingCountIndex(String building)
+            -static int totalBuildingCount
+            -static int[] buildingCounts
+        }
+        'TODO: the link for the BuildingCounter class'
+
+        BuildingCounter ..> Accommodation : uses
+        BuildingCounter ..> Study : uses
+        BuildingCounter ..> Cafeteria : uses
+        BuildingCounter ..> Relaxation : uses
+        BuildingCounter ..> Restaurant : uses
+
+        class Coordinate {
+            +int x
+            +int y
+
+            +Coordinate()
+            +Coordinate(int X, int Y)
+            +double distance(Coordinate point)
+        }
+
+
+        class CoordinatePair {
+            +Coordinate start
+            +Coordinate end
+
+            +CoordinatePair()
+            +CoordinatePair(Coordinate Start, Coordinate End)
+        }
+        'TODO: the link for the CoordinatePair class'
+
+        CoordinatePair ..> Coordinate : uses
+
+        class Map {
+            +void toggleBuildingPlacement(String building)
+            +void placeBuilding(Coordinate position)
+            -BuildingDisplay buildingDisplay
+            -List<Building> buildings
+            -boolean placing
+            -String placementType
+            -MapUtils mapUtils
+        }
+        'TODO: the link for the Map class'
+
+        Map ..> Coordinate : uses
+        Map ..> Building : uses
+        Map ..> BuildingDisplay : uses
+        Map ..> MapUtils : uses
+        Map ..> SpaceStation : uses
+        Map ..> Drawer : uses
+        Map ..> SatisfactionMeter : uses
+
+        class MapUtils {
+            +void loadMap(Map map)
+            +Tile getTile(int tileID)
+        }
+        'TODO: the link for the MapUtils class'
+
+        MapUtils ..> Map : uses
+        MapUtils ..> Tile : uses
+        MapUtils ..> Grass : uses
+        MapUtils ..> Lake : uses
+        MapUtils ..> Mountain : uses
+        MapUtils ..> York : uses
+    }
+    class Money {
+        +static Component MoneyText
+        -static int money = 1000
+
+        +static int getMoney()
+        +static void increaseMoney(int value)
+        +static void decreaseMoney(int value)
+        +static void updateDisplay()
+        +static void resetMoney()
+    }
+    'TODO: the link for the Money class'
+
+    Money ..> Component : uses
+
+    class SatisfactionMeter {
+        +static Component satisfactionText
+        -static int satisfactionScore = 0
+        -static int newscore = 0
+
+        +static int getSatisfactionScore()
+        +static void increaseSatisfactionScore(int value)
+        +static void decreaseSatisfactionScore(int value)
+        +static void updateDisplay()
+        +static void resetSatisfactionScore()
+    }
+    'TODO: the link for the SatisfactionMeter class'
+
+    SatisfactionMeter ..> Component : uses
+
+
+
+    class Timer {
+        +static MenuText text
+        -static float timeRemaining
+        +static boolean isRunning
+        -boolean hasEnded
+        +static ArrayList<EventsEnum> eventQueue
+        +static float nextEvent
+        +static float eventResult
+        +static int score
+
+        +Timer(float startTime)
+        +void start()
+    }
+
+    Timer ..> MenuText : uses
+    Timer ..> EventsEnum : uses
+    Timer ..> CatEvent : uses
+    Timer ..> DonateEvent : uses
+    Timer ..> StrikeEvent : uses
+    Timer ..> GameUtils : uses
+    Timer ..> ScreenUtils : uses
+    Timer ..> Drawer : uses
+    Timer ..> SatisfactionMeter : uses
+
+    class TimerTest{
+        +void updateShouldDecreaseTimeRemaining()
+        +void updateShouldEndWhenTimeUp()
+        +void updateShouldNotChangeTimeRemainingWhenPaused()
+        +void updateShouldNotEndWhenPausedAndTimeUp()
+
+    }
+    'TODO: the link for the Timer class'
+    TimerTest --> Timer : uses
+
+    class York {
+        +String mapData
+    }
+
+
+
+    package UI {
+
+        package Components {
+            class Backdrop extends Component {
+                +Backdrop(float X, float Y, float Width, float Height)
+                +Backdrop(String imagePath, float X, float Y, float Width, float Height)
+                +Backdrop(List<String> imagePaths, float X, float Y, float Width, float Height)
+                +float getX()
+                +float getY()
+                +float getWidth()
+                +float getHeight()
+                +void setX(float x)
+                +void setY(float y)
+                +void setWidth(float width)
+                +void setHeight(float height)
+                -float x
+                -float y
+                -float width
+                -float height
+            }
+            class Button extends Component {
+                +void setClickAction(String Action)
+                -static void toggleRelaxationBuilding(Boolean isAction)
+                -static void ToggleRestaurantBuilding(Boolean isAction)
+                -static void printBuildingChange()
+
+            }
+
+            'TODO: the link for the Button class'
+            Button --> GameUtils : uses
+            Button --> MapUtils : uses
+
+            class Leaderboard extends Component {
+                +static Map<String, Integer> leaderboardmap
+                +Map<String, Integer> StringToMap(String input)
+                +void updateScore()
+            }
+
+            class LeaderboardTest{
+                +void addScoreToLeader() throws IOException
+            }
+            'TODO: the link for the Leaderboard class'
+            LeaderboardTest ..> Leaderboard : uses
+
+            class MapBuilding extends Component {
+                -float gridBaseWidth
+                -float gridBaseHeight
+                -float gridX
+                -float gridY
+
+                +MapBuilding(String imagePath, float X, float Y, float Width, float Height)
+                +MapBuilding(List<String> imagePaths, float X, float Y, float Width, float Height)
+                +MapBuilding(String imagePath, float X, float Y)
+                +MapBuilding()
+
+                -void initialiseBuilding(float X, float Y, float Width, float Height)
+                -static float getX(float X)
+                -static float getY(float Y)
+                +void setGridCoordinates(int X, int Y)
+            }
+            'TODO: the link for the MapBuilding class'
+            MapBuilding ..> Tile : uses
+
+            class MapTile extends Component {
+                -int mapHeight
+                +int gridX
+                +int gridY
+
+                +MapTile(SpriteSheet SpriteSheet, int TileID, float X, float Y, float Width, float Height)
+                +MapTile(SpriteSheet SpriteSheet, int TileID, float X, float Y)
+                +MapTile(SpriteSheet SpriteSheet, int TileID, float X, float Y, int GridX, int GridY, int MapHeight)
+                +MapTile()
+
+                +void applyZoomOffset()
+                +void setClickAction(String action)
+            }
+            'TODO: the link for the MapTile class'
+            MapTile ..> SpriteSheet : uses
+
+            class MenuText extends Component {
+                +MenuText(String text, float X, float Y, float WidthScale, float HeightScale)
+                +void setClickAction(String action)
+                -String text
+                -boolean isText
+            }
+        }
+
+
+        package Systems {
+            class Window {
+                +static void updateResolution(int width, int height)
+            }
+
+            class BuildingDisplay {
+                +static final int Layer = -1
+                +List<Building> buildings
+
+                +BuildingDisplay(List<Building> Buildings)
+                +void drawBuildings()
+            }
+            'TODO: the link for the BuildingDisplay class'
+            BuildingDisplay ..> Building : uses
+            BuildingDisplay ..> Drawer : uses
+
+            class MapDisplay {
+                +static final int Layer = -2
+                -Map map
+                -SpriteSheet spriteSheet
+
+                +MapDisplay(Map Map)
+                +void drawMap()
+                -int getX(int x)
+                -int getY(int y)
+            }
+            'TODO: the link for the MapDisplay class'
+
+            MapDisplay ..> Map : uses
+            MapDisplay ..> Tile : uses
+            MapDisplay ..> Drawer : uses
+            MapDisplay ..> SpriteSheet : uses
+            MapDisplay ..> Camera : uses
+            MapDisplay ..> MapTile : uses
+            MapTile ..> Anchor : uses
+
+            class EventPopup {
+                +Event event
+                +List<Component> elements
+                +List<Component> buttonElements
+
+                +EventPopup(Event Event)
+                +void initialise()
+                +void close()
+            }
+            'TODO: the link for the EventPopup class'
+
+            EventPopup ..> Event : uses
+            EventPopup ..> Component : uses
+            EventPopup ..> GameUtils : uses
+            EventPopup ..> InputHandler : uses
+            EventPopup ..> Drawer : uses
+        }
+
+        class Camera {
+            +static Map map
+            +static int gridX
+            +static int gridY
+            +static int x = 0
+            +static int y = 0
+            +static int width = Window.defaultWidth
+            +static int height = Window.defaultHeight
+            +static float zoom = 1
+            -static final float MinZoom = 0.375f
+            -static final float MaxZoom = 2.75f
+            -static final int ZoomSpeed = 8
+            -static Coordinate lastMousePos
+            -static Coordinate lastClickPos
+            -static boolean placing
+            -static String placementType
+            -static Building hoverDisplay
+
+            +static void update()
+            -static float getGridX(int X)
+            -static float getGridY(int Y)
+        }
+        'TODO: the link for the Camera class'
+
+        Camera ..> Map : uses
+        Camera ..> Coordinate : uses
+        Camera ..> Building : uses
+        Camera ..> Tile : uses
+        Camera ..> Window : uses
+        Camera ..> MapBuilding : uses
+        Camera ..> MapTile : uses
+        Camera ..> BuildingDisplay : uses
+        Camera ..> MapDisplay : uses
+        Camera ..> GameUtils : uses
+        Camera ..> MapUtils : uses
+
+        class Component {
+            +Component(List<String> ImagePaths, float X, float Y, float Width, float Height)
+            +Component(SpriteSheet SpriteSheet, int SpriteID, float X, float Y, float Width, float Height)
+            +void update()
+            +static void updateResolution()
+
+            -void initialise(float X, float Y, float Width, float Height)
+            -void initialise(float X, float Y, float Width, float Height, float Scale)
+            -void updateSize()
+            -void applyAnchor()
+
+            -Sprite sprite
+            -float baseX
+            -float baseY
+            -float baseWidth
+            -float baseHeight
+            -float scale
+            -float offsetX
+            -float offsetY
+            -static float widthRatio
+            -static float heightRatio
+        }
+        'TODO: the link for the Component class'
+
+        Component ..> Sprite : uses
+        Component ..> SpriteSheet : uses
+        Component ..> Window : uses
+
+        class Drawer {
+            -static List<DrawInfo> drawQueue
+            -static SpriteBatch spriteBatch
+            -static BitmapFont font
+            -static Map<String, Texture> textures
+            -static Map<Texture, Map<Integer, TextureRegion>> textureRegions
+
+            +static <T> List<T> popLayer(int layer, T type)
+
+            class DrawInfo {
+                +int layer
+                +Component component
+
+                +DrawInfo(int Layer, Component Component)
+            }
+        }
+        'TODO: the link for the Drawer class'
+
+        Drawer ..> Component : uses
+        Drawer ..> Texture : uses
+        Drawer ..> TextureRegion : uses
+        Drawer ..> SpriteBatch : uses
+        Drawer ..> BitmapFont : uses
+        Drawer ..> Coordinate : uses
+
+        class EndScreen implements Screen {
+            +EndScreen()
+            +void show()
+            +void render(float delta)
+            +void resize(int width, int height)
+            +void pause()
+            +void resume()
+            +void hide()
+        }
+        'TODO: the link for the EndScreen class'
+
+        EndScreen ..> GameUtils : uses
+        EndScreen ..> ScreenUtils : uses
+        EndScreen ..> Drawer : uses
+        EndScreen ..> Window : uses
+        EndScreen ..> InputHandler : uses
+
+        class GameplayScreen implements Screen {
+            -Timer timer
+            -boolean stateChanged
+
+            +void show()
+            +void render(float delta)
+            +void resize(int width, int height)
+            +void pause()
+            +void resume()
+            +void hide()
+        }
+        'TODO: the link for the GameplayScreen class'
+
+        GameplayScreen ..> Timer : uses
+        GameplayScreen ..> GameUtils : uses
+        GameplayScreen ..> ScreenUtils : uses
+        GameplayScreen ..> Drawer : uses
+        GameplayScreen ..> Window : uses
+
+        class LeaderboardScreen implements Screen {
+            +LeaderboardScreen()
+            +void show()
+            +void render(float delta)
+            +void resize(int width, int height)
+            +void pause()
+            +void resume()
+            +void hide()
+        }
+        'TODO: the link for the LeaderboardScreen class'
+
+        LeaderboardScreen ..> GameUtils : uses
+        LeaderboardScreen ..> ScreenUtils : uses
+        LeaderboardScreen ..> Drawer : uses
+        LeaderboardScreen ..> Window : uses
+        LeaderboardScreen ..> InputHandler : uses
+
+
+        class saveScreen implements Screen, TextField.TextFieldListener {
+            +static Stage stage
+            -SpriteBatch batch
+            +static int timerd
+            +static TextField nameField
+            -Label label
+
+            +saveScreen()
+        }
+        'TODO: the link for the saveScreen class'
+
+        saveScreen ..> Timer : uses
+        saveScreen ..> Button : uses
+        saveScreen ..> Leaderboard : uses
+        saveScreen ..> Gdx : uses
+        saveScreen ..> ScreenUtils : uses
+        saveScreen ..> InputHandler : uses
+        saveScreen ..> SpriteBatch : uses
+        saveScreen ..> Stage : uses
+        saveScreen ..> Label : uses
+        saveScreen ..> Skin : uses
+        saveScreen ..> TextField : uses
+
+        class ScreenUtils {
+            +static Screen currentScreen
+            +static Screen startScreen
+            +static Screen gameplayScreen
+            +static Screen endScreen
+            +static Screen leaderboardScreen
+            +static Screen saveScreen
+
+            +static void openGameplayScreen()
+            +static void OpenEndScreen()
+            +static void OpenStartScreen()
+            +static void OpenSaveScreen()
+            +static void OpenLeaderboardScreen()
+        }
+        'TODO: the link for the ScreenUtils class'
+
+        ScreenUtils ..> StartScreen : uses
+        ScreenUtils ..> GameplayScreen : uses
+        ScreenUtils ..> EndScreen : uses
+        ScreenUtils ..> LeaderboardScreen : uses
+        ScreenUtils ..> saveScreen : uses
+
+        class Sprite {
+            -Map<String, AnimationInfo> animationType
+            -String selected = "DEFAULT"
+            +boolean usesSpriteSheet = false
+            +SpriteSheet spriteSheet = null
+
+            +Sprite(String ImagePath)
+            +Sprite(List<String> ImagePaths)
+            +Sprite(SpriteSheet SpriteSheet, int SpriteID)
+            +Sprite(SpriteSheet SpriteSheet, ArrayList<Integer> SpriteIDs)
+
+            -void Initialise()
+            -void setDefaultImage(String ImagePath)
+            -void setDefaultAnimation(List<String> ImagePaths)
+            -void setDefaultImage(int SpriteID)
+            -void setDefaultAnimation(ArrayList<Integer> SpriteIDs)
+        }
+        'TODO: the link for the Sprite class'
+
+        Sprite ..> AnimationInfo : uses
+        Sprite ..> SpriteSheet : uses
+
+        class SpriteSheet {
+            +String imagePath
+            +int spriteWidth
+            +int spriteHeight
+            -int sheetWidth
+            -int sheetHeight
+
+            +SpriteSheet(String ImagePath, int SheetWidth, int SheetHeight, int SpriteWidth, int SpriteHeight)
+            +Coordinate getRegionCoords(int spriteID)
+        }
+        'TODO: the link for the SpriteSheet class'
+
+        SpriteSheet ..> Coordinate : uses
+
+        class StartScreen implements Screen {
+            +StartScreen()
+            +void loadLeaderboard() throws IOException
+            +void show()
+            +void render(float delta)
+            +void resize(int width, int height)
+            +void pause()
+            +void resume()
+            +void hide()
+            +void dispose()
+        }
+        'TODO: the link for the StartScreen class'
+
+        StartScreen ..> GameUtils : uses
+        StartScreen ..> InputHandler : uses
+        StartScreen ..> ScreenUtils : uses
+        StartScreen ..> Leaderboard : uses
+
+        class Window {
+            +static int defaultWidth = 1280
+            +static int defaultHeight = 720
+            +static int width = defaultWidth
+            +static int height = defaultHeight
+
+            +static void updateResolution(int ScreenWidth, int ScreenHeight)
+        }
+        'TODO: the link for the Window class'
+
+        Window ..> Component : uses
+
+
+
+    }
+@enduml
