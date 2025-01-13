@@ -44,7 +44,6 @@ public class MapUtils {
     }
 
     public boolean buildingPlaceable(Building newBuilding) {
-<<<<<<< HEAD
 // If the game is paused do not allow placement
         if (!isRunning) {
             return false;
@@ -53,54 +52,16 @@ public class MapUtils {
             Coordinate b = Building.position;
             Coordinate newPos = newBuilding.position;
 
-=======
-
-        for (Building Building : map.buildings) {
-            Coordinate b = Building.position;
-            Coordinate newPos = newBuilding.position;
-
->>>>>>> parent of 65aab95 (Headless Testing Implemented)
             // Checks if the position of the new building would cause any part of itself to
             // overlap with an existing building
             if (newPos.x + newBuilding.width - 1 >= b.x && newPos.x < b.x + Building.width &&
-                newPos.y + newBuilding.height - 1 >= b.y && newPos.y < b.y + Building.height) {
+                    newPos.y + newBuilding.height - 1 >= b.y && newPos.y < b.y + Building.height) {
                 return false;
             }
-<<<<<<< HEAD
-=======
-
-            // If the game is paused do not allow placement
-            if (!isRunning) {
-                return false;
-            }
->>>>>>> parent of 65aab95 (Headless Testing Implemented)
 
 
-        }
-        //Assessment 2
-        // Checks if the position of the new building would overlap with water or
-        // mountains
-        String aUnique = York.RawMap;
-        String[] bUnique = aUnique.split("\n");
-        String[] cUnique = bUnique[1].split(" ");
-        String dUnique = cUnique[0];
-        try {
-
-            for (int iUnique = 0; iUnique < newBuilding.width; iUnique++) {
-                for (int jUnique = 0; jUnique < newBuilding.height; jUnique++) {
-                    cUnique = bUnique[48 - newBuilding.position.y - jUnique].split(" ");
-                    if (!(Integer.parseInt(cUnique[newBuilding.position.x + iUnique]) == Integer.parseInt(dUnique))) {
-                        return false;
-                    }
-                }
-            }
-        } catch (Exception e) {
-        }
-        return true;
-    }
 
 
-<<<<<<< HEAD
         }
         //Assessment 2
         // Checks if the position of the new building would overlap with water or
@@ -136,19 +97,6 @@ public class MapUtils {
     public boolean canAffordBuilding(int cost) {
 
 
-=======
-    /**
-     * Assessment 2
-     * Determines if the player can afford to build a building based on its cost.
-     * If the player has enough money then the cost is subtracted from the available funds.
-     *
-     * @param cost The cost of the building to be constructed.
-     * @return true if the player can afford the building, otherwise false.
-     */
-    public boolean canAffordBuilding(int cost) {
-
-
->>>>>>> parent of 65aab95 (Headless Testing Implemented)
         if (Money.getMoney() - cost >= 0) {
 
             Money.decreaseMoney(cost);
@@ -166,7 +114,7 @@ public class MapUtils {
 
             // Checks if a building occupies the current tile space
             if (tile.x >= pos.x && tile.x < pos.x + building.width &&
-                tile.y >= pos.y && tile.y < pos.y + building.height) {
+                    tile.y >= pos.y && tile.y < pos.y + building.height) {
                 return true;
             }
         }
@@ -175,7 +123,7 @@ public class MapUtils {
 
     public boolean outsideMap(Coordinate tile) {
         if (tile.x >= map.width || tile.x < 0 ||
-            tile.y >= map.height || tile.y < 0) {
+                tile.y >= map.height || tile.y < 0) {
             return true;
         }
         return false;
