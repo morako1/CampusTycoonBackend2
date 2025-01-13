@@ -1,5 +1,4 @@
 package CampusTycoon.UI;
-
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -7,7 +6,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import CampusTycoon.GameUtils;
 import CampusTycoon.GameLogic.Timer;
 
-public class GameplayScreen implements Screen {
+public class GameplayScreen implements Screen{
     private Timer timer;
     private boolean stateChanged;
 
@@ -34,26 +33,26 @@ public class GameplayScreen implements Screen {
         Drawer.drawAll();
     }
 
-    @Override
-    public void resize(int width, int height) {
-        Window.updateResolution(width, height);
-        Drawer.updateAll();
-    }
+        @Override
+        public void resize(int width, int height) {
+            Window.updateResolution(width, height);
+            Drawer.updateAll();
+        }
 
-    @Override
-    public void pause() {
-    }
+        @Override
+        public void pause() {
+        }
 
-    @Override
-    public void resume() {
-    }
+        @Override
+        public void resume() {
+        }
 
-    @Override
-    public void hide() {
-    }
+        @Override
+        public void hide() {
+        }
 
-    @Override
-    public void dispose() {
-        // Destroy screen's assets here.
+        @Override
+        public void dispose() {
+            // Destroy screen's assets here.
+        }
     }
-}

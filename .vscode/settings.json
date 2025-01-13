@@ -1,5 +1,0 @@
-{
-	"java.configuration.updateBuildConfiguration": "interactive",
-	"java.jdt.ls.protobufSupport.enabled": true,
-	"java.import.generatesMetadataFilesAtProjectRoot": true
-}

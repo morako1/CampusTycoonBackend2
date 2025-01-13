@@ -2,22 +2,9 @@
 eclipse.project.name = appName + '-core'
 
 dependencies {
-  implementation 'org.junit.jupiter:junit-jupiter:5.11.4'
   api "com.badlogicgames.gdx:gdx:$gdxVersion"
-  implementation 'com.badlogicgames.gdx:gdx-backend-headless:1.12.1'
-
-  api "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
-
-
-  implementation 'com.badlogicgames.gdx:gdx-backend-headless:1.12.1'
 
   if(enableGraalNative == 'true') {
     implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
   }
-}
-
-test{
-
-  useJUnitPlatform()
-  testLogging.showStandardStreams=true
 }
