@@ -1,4 +1,6 @@
 @startuml
+top to bottom direction
+skinparam linetype ortho
 package CampusTycoon {
     package GameLogic {
 
@@ -42,15 +44,15 @@ package CampusTycoon {
         }
         'TODO: the link for the Main class'
 
-        Main ..> InputMultiplexer : uses
-        Main ..> saveScreen : uses
-        Main ..> Stage : uses
-        Main ..> ScreenViewport : uses
-        Main ..> InputHandler : uses
-        Main ..> Gdx : uses
-        Main ..> Screen : uses
-        Main ..> StartScreen : uses
-        Main ..> ScreenUtils : uses
+        Main ..> InputMultiplexer : intializes
+        Main ..> saveScreen : intializes
+        Main ..> Stage : intializes
+        Main ..> ScreenViewport : intializes
+        Main ..> InputHandler : intializes
+        Main ..> Gdx : intializes
+        Main ..> Screen : intializes
+        Main ..> StartScreen : intializes
+        Main ..> ScreenUtils : intializes
 
         'TODO: the building class folder  '
         package Building {
@@ -69,10 +71,10 @@ package CampusTycoon {
             }
             'TODO: the link for the Building class'
 
-            Building ..> Coordinate : uses
-            Building ..> MapBuilding : uses
-            Building ..> Anchor : uses
-            Building ..> BuildingCounter : uses
+            Building ..> Coordinate : creates
+            Building ..> MapBuilding : creates
+            Building ..> Anchor : creates
+            Building ..> BuildingCounter : increments
 
             class Accommodation extends Building {
                 +static final String defaultImage = "Buildings\\Accommodation.png"
@@ -87,8 +89,8 @@ package CampusTycoon {
             }
             'TODO: the link for the Accommodation class'
 
-            Accommodation ..> Coordinate : uses
-            Accommodation ..> BuildingCounter : uses
+            Accommodation ..> Coordinate : creates
+            Accommodation ..> BuildingCounter : increments
 
             class Cafeteria extends Building {
                 +static final String defaultImage = "Buildings\\Cafeteria.png"
@@ -103,8 +105,8 @@ package CampusTycoon {
             }
             'TODO: the link for the Cafeteria class'
 
-            Cafeteria ..> Coordinate : uses
-            Cafeteria ..> BuildingCounter : uses
+            Cafeteria ..> Coordinate : creates
+            Cafeteria ..> BuildingCounter : increments
 
             class Relaxation extends Building {
                 +static final String defaultImage = "Buildings\\Relaxation.png"

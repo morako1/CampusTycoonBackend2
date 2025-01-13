@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class Main extends Game {
+public class CampusTycoon extends Game {
 
     public static InputMultiplexer multiplexer;
 
@@ -27,15 +27,15 @@ public class Main extends Game {
         multiplexer = new InputMultiplexer();
         saveScreen.stage = new Stage(new ScreenViewport());
 
-        Main.multiplexer = new InputMultiplexer();
-        Main.multiplexer.addProcessor(saveScreen.stage);
-        Main.multiplexer.addProcessor(new InputHandler());
+        CampusTycoon.multiplexer = new InputMultiplexer();
+        CampusTycoon.multiplexer.addProcessor(saveScreen.stage);
+        CampusTycoon.multiplexer.addProcessor(new InputHandler());
 
 
 
 
 
-        Gdx.input.setInputProcessor(Main.multiplexer);
+        Gdx.input.setInputProcessor(CampusTycoon.multiplexer);
 
 		// Sets the screen to the Main Menu
 
