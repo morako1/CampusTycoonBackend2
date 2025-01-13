@@ -1,11 +1,7 @@
-package CampusTycoon.UI.Components;
-
+import CampusTycoon.UI.Components.Leaderboard;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.HashMap;
-import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.Gdx;
 
 import static CampusTycoon.UI.Components.Leaderboard.leaderboardmap;
 import static org.junit.jupiter.api.Assertions.*;
