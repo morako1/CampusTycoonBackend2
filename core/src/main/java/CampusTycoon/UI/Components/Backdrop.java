@@ -6,17 +6,19 @@ import CampusTycoon.UI.Component;
 
 public class Backdrop extends Component {
 
-	public Backdrop(float X, float Y, float Width, float Height) {
-		super(X, Y, Width, Height);
-	}
-	public Backdrop(String imagePath, float X, float Y, float Width, float Height) {
-		super(imagePath, X, Y, Width, Height);
-	}
-	public Backdrop(List<String> imagePaths, float X, float Y, float Width, float Height) {
-		super(imagePaths, X, Y, Width, Height);
-	}
+    public Backdrop(float X, float Y, float Width, float Height) {
+        super(X, Y, Width, Height);
+    }
 
-	public float getX() {
+    public Backdrop(String imagePath, float X, float Y, float Width, float Height) {
+        super(imagePath, X, Y, Width, Height);
+    }
+
+    public Backdrop(List<String> imagePaths, float X, float Y, float Width, float Height) {
+        super(imagePaths, X, Y, Width, Height);
+    }
+
+    public float getX() {
         return this.x;
     }
 
@@ -32,7 +34,7 @@ public class Backdrop extends Component {
         return this.height;
     }
 
-	public void setX(float x) {
+    public void setX(float x) {
         this.x = x;
     }
 
@@ -47,13 +49,12 @@ public class Backdrop extends Component {
     public void setHeight(float height) {
         this.height = height;
     }
-	
-	
-	
-	// Not needed as backdrop elements don't need to do anything on click
-	@Override
-	public void setClickAction(String action) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'setClickAction'");
-	}
+
+
+    // Not needed as backdrop elements don't need to do anything on click
+    @Override
+    public void setClickAction(String action) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setClickAction'");
+    }
 }

@@ -12,11 +12,12 @@ import com.badlogic.gdx.Gdx;
 
 
 import java.util.*;
+
 import static CampusTycoon.GameLogic.SatisfactionMeter.getSatisfactionScore;
 import static CampusTycoon.GameLogic.SatisfactionMeter.resetSatisfactionScore;
 
-public class Timer{
-	public static MenuText text;
+public class Timer {
+    public static MenuText text;
     private static float timeRemaining;
     public static boolean isRunning;
     public static boolean popUp;
@@ -28,6 +29,10 @@ public class Timer{
     public static int score;
     public static MenuText pauseText;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 65aab95 (Headless Testing Implemented)
     /**
      * Assessment 2
      * Constructs a new Timer object.
@@ -77,7 +82,9 @@ public class Timer{
 
     }
 
-    public static void resume() { isRunning = true; }
+    public static void resume() {
+        isRunning = true;
+    }
 
     /**
      * Assessmet 2
@@ -122,11 +129,14 @@ public class Timer{
                 text.text = "Time: " + String.valueOf(timeRemaining).split("\\.")[0];
                 text.update();
             }
+<<<<<<< HEAD
         }
         else{
             //Assessment 2
             //When the game is paused add the pause text
             pauseText.text= "Paused";
+=======
+>>>>>>> parent of 65aab95 (Headless Testing Implemented)
         }
     }
 
@@ -134,6 +144,10 @@ public class Timer{
     /**
      * Assessment2
      * Processes the next event in the event queue and
+<<<<<<< HEAD
+=======
+     * <p>
+>>>>>>> parent of 65aab95 (Headless Testing Implemented)
      * If the event queue is empty, the method returns
      * - STRIKE: Creates and assigns a new instance of StrikeEvent to the current event.
      * - DONATE: Creates and assigns a new instance of DonateEvent to the current event.

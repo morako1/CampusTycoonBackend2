@@ -2,14 +2,12 @@ package CampusTycoon.GameLogic;
 
 import CampusTycoon.UI.Component;
 
+
 public class Money {
-
-
 
 
     public static Component MoneyText;
     private static int money = 2000;
-
 
 
     public static int getMoney() {
@@ -18,7 +16,7 @@ public class Money {
 
     public static void increaseMoney(int value) {
         money = money + value;
-       Money.updateDisplay();
+        Money.updateDisplay();
 
 
     }
