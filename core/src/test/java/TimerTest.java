@@ -1,5 +1,4 @@
-package CampusTycoon.GameLogic;
-
+import CampusTycoon.GameLogic.Timer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
