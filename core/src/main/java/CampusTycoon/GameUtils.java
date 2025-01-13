@@ -28,6 +28,7 @@ import com.sun.source.tree.TryTree;
 
 
 import static CampusTycoon.GameLogic.Timer.getFinalScore;
+import static CampusTycoon.GameLogic.Timer.pause;
 
 public class GameUtils{
     public static Map map;
@@ -96,6 +97,9 @@ public class GameUtils{
         InputHandler.add(startScreenButtonList);
     }
 
+    /**Assessment 2
+     * Sets up gameplay UI
+     */
     public static void createGameplayUI() {
         Button buttonAccommodation = new Button("Buildings\\Accommodation.png", -410, 10, 90, 66);
         buttonAccommodation.setClickAction(Actions.ToggleAccommodationBuilding);
@@ -190,6 +194,13 @@ public class GameUtils{
         cafeCost.setAnchor(Anchor.BottomCentre);
         BuildingCounter.UI.add(cafeCost);
 
+        MenuText pauseText = new MenuText(
+            String.valueOf("Paused"),
+            0, 150, 2f, 2f);
+        pauseText.setAnchor(Anchor.TopCentre);
+        BuildingCounter.UI.add(pauseText);
+        Timer.pauseText = pauseText;
+
 
 
 
@@ -260,8 +271,8 @@ public class GameUtils{
         timerText.setAnchor(Anchor.TopRight);
         Timer.text = timerText;
 
-        List<Component> textElements = Arrays.asList(satisfactionText, moneyText, buildingCounterText,
-            accommodationCount, studyCount, cafeCount, relaxCount, restaurantCount,restaurantCost,relaxCost,cafeCost,accommodationCost,studyCost, timerText);
+        List<Component> textElements = Arrays.asList(satisfactionText, pauseText, moneyText, buildingCounterText,
+            accommodationCount, studyCount, cafeCount, relaxCount, restaurantCount, restaurantCost, relaxCost, cafeCost, accommodationCost, studyCost, timerText);
 
         // Add all text to the drawQueue
         for (Component text : textElements) {
@@ -280,11 +291,14 @@ public class GameUtils{
 //    }
 
 
-
-
-    //(Assessment 2) This will tell the user the effects of their choice
-    public static void EventResultPopup(){
-        Timer.popUp=true;
+    /**
+     * Assessment 2
+     * <p>
+     * Displays the result popup for an event in the game. This method is responsible
+     * for rendering a popup that tells the user the outcome of the event
+     */
+    public static void EventResultPopup() {
+        Timer.popUp = true;
         Timer.isRunning = false;
 
 
@@ -325,7 +339,15 @@ public class GameUtils{
 
     }
 
-
+    /**
+     * Assessment 2
+     * <p>
+     * Creates a popup UI for displaying random events in game
+     * Generates 2 buttons to give the user a choice on how they want to react
+     *
+     * @param event The event for which the popup UI is being created. This object
+     *              provides the text for the ui
+     */
     public static void createEventPopupUI(Event event) {
         Backdrop eventScreenBackdrop = new Backdrop("Backdrop.png", 0, 30, 400, 350);
         eventScreenBackdrop.setAnchor(Anchor.Centre);
@@ -374,10 +396,17 @@ public class GameUtils{
         Drawer.add(2, testText);
     }
 
+    /**
+     * Assessment 2
+     * <p>
+     * Creates the end screen user interface for the game.
+     */
     public static void createEndScreenUI() {
 
 
-        MenuText achievementsTitle = new MenuText("Achievements Achieved:",240,240,2f,2f);
+        //Assessment 2
+        //Generate UI
+        MenuText achievementsTitle = new MenuText("Achievements Achieved:", 240, 240, 2f, 2f);
 
         achievementsTitle.setAnchor(Anchor.Centre);
 
@@ -419,6 +448,13 @@ public class GameUtils{
         // (Allows buttons to be clicked and things to actually happen)
         InputHandler.add(endScreenButtonList);
     }
+
+    /**
+     * Assessment 2
+     *
+     * Displays the leaderboard user interface.
+     * Gets the leaderboard data from the leaderboard class
+     */
     public static void leaderboardUI() {
         Button buttonMainMenu = new Button("Main Menu.png", 0, -300, 262, 66);
         buttonMainMenu.setClickAction(Actions.OpenStartScreen);
