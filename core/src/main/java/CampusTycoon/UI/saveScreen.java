@@ -21,14 +21,15 @@ import java.io.IOException;
 public class saveScreen implements Screen, TextField.TextFieldListener {
 
 
-
-
     public static Stage stage;
     private SpriteBatch batch;
-    public static int timerd;
+
     public static TextField nameField;
     private Label label;
-    /** Screen that appears when the leaderboard is selected */
+
+    /**
+     * Screen that appears when the leaderboard is selected
+     */
     public saveScreen() {
 
         //Assessment2
@@ -37,28 +38,21 @@ public class saveScreen implements Screen, TextField.TextFieldListener {
         //stage = new Stage(new ScreenViewport());
 
 
-
         //Main.multiplexer.addProcessor(stage);
         // Gdx.input.setInputProcessor(Main.multiplexer);
         batch = new SpriteBatch();
         Skin skin = new Skin(Gdx.files.internal("Skins/uiskin.json"));
-        nameField = new TextField("Name",skin);
+        nameField = new TextField("", skin);
 
-        nameField.setSize(250,65);
+        nameField.setSize(250, 65);
 
-        nameField.setPosition(Gdx.graphics.getWidth()/2f -nameField.getWidth()/2f,Gdx.graphics.getHeight()/2f);
+        nameField.setPosition(Gdx.graphics.getWidth() / 2f - nameField.getWidth() / 2f, Gdx.graphics.getHeight() / 2f);
         nameField.setMaxLength(20);
 
 
-
-
-
-
-
-
-        label = new Label("Enter Name",skin);
+        label = new Label("Enter Name", skin);
         label.setColor(Color.BLACK);
-        label.setPosition(Gdx.graphics.getWidth()/2f -label.getWidth()/2f -80f,Gdx.graphics.getHeight()/2f+70f);
+        label.setPosition(Gdx.graphics.getWidth() / 2f - label.getWidth() / 2f - 80f, Gdx.graphics.getHeight() / 2f + 70f);
 
         stage.addActor(nameField);
         stage.addActor(label);
@@ -67,15 +61,16 @@ public class saveScreen implements Screen, TextField.TextFieldListener {
         System.out.println("savescreen create");
     }
 
-    public static String getText(){
+    public static String getText() {
         return nameField.getText();
     }
+
     @Override
     public void show() {
         label.setVisible(true);
         nameField.setVisible(true);
 
-        System.out.println(Gdx.input.getInputProcessor()+"PROCESSOR");
+        System.out.println(Gdx.input.getInputProcessor() + "PROCESSOR");
         //Load leaderboard so we can edit it
         try {
             Leaderboard.loadLeaderboard();
@@ -83,12 +78,10 @@ public class saveScreen implements Screen, TextField.TextFieldListener {
             throw new RuntimeException(e);
         }
         //if stage == null create ui
-    if(stage == null){
+        if (stage == null) {
 
 
-    }
-
-
+        }
 
 
         System.out.println("Show save input");
@@ -107,8 +100,6 @@ public class saveScreen implements Screen, TextField.TextFieldListener {
     public void render(float delta) {
         ScreenUtils.clear(Color.WHITE);
         Drawer.drawAll();
-
-
 
 
         stage.act(delta);
@@ -134,11 +125,15 @@ public class saveScreen implements Screen, TextField.TextFieldListener {
     @Override
     public void hide() {
 
-       // Leaderboard.updateScore(nameField.get());
+        // Leaderboard.updateScore(nameField.get());
 
         label.setVisible(false);
         nameField.setVisible(false);
+        nameField.setVisible(false);
+
+
         Leaderboard.updateScore(nameField.getText(), Timer.score);
+        nameField.setText("");
         nameField.setMessageText("Name");
         try {
             Leaderboard.saveLeaderboard();

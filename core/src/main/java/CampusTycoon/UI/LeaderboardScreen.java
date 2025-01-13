@@ -10,9 +10,11 @@ import CampusTycoon.GameUtils;
 import CampusTycoon.InputHandler;
 
 
-public class LeaderboardScreen implements Screen{
+public class LeaderboardScreen implements Screen {
 
-    /** Screen that appears when the leaderboard is selected */
+    /**
+     * Screen that appears when the leaderboard is selected
+     */
     public LeaderboardScreen() {
     }
 

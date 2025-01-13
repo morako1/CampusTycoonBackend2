@@ -55,9 +55,8 @@ public class SatisfactionMeter {
      * Calculates satisfaction score for accommodation building type based on the proximity of other buildings
      * (study buildings, restaurants, relaxation areas, and cafeterias).
      *
-     *
      * @param building The building for which satisfaction is calculated for.
-     * @param list A list of all buildings on the map.
+     * @param list     A list of all buildings on the map.
      */
     private static void accommodationSatisfaction(Building building, List<Building> list) {
         int counter = 5;
@@ -77,8 +76,7 @@ public class SatisfactionMeter {
                 if (checkDistance < studydistance) {
                     studydistance = checkDistance;
                 }
-            }
-            else if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.RestaurantBuilding).getClass())) {
+            } else if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.RestaurantBuilding).getClass())) {
 
                 float checkDistance = (float) Math.sqrt((building.position.y - i.position.y) * (building.position.y - i.position.y) + (building.position.x - i.position.x) * (building.position.x - i.position.x));
 
@@ -88,23 +86,18 @@ public class SatisfactionMeter {
 
                 }
 
-            }
-            else if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.RelaxationBuilding).getClass())) {
+            } else if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.RelaxationBuilding).getClass())) {
 
                 float checkDistance = (float) Math.sqrt((building.position.y - i.position.y) * (building.position.y - i.position.y) + (building.position.x - i.position.x) * (building.position.x - i.position.x));
                 if (checkDistance < relaxationdistance) {
                     relaxationdistance = checkDistance;
                 }
-            }
-            else if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.CafeteriaBuilding).getClass())) {
+            } else if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.CafeteriaBuilding).getClass())) {
                 float checkDistance = (float) Math.sqrt((building.position.y - i.position.y) * (building.position.y - i.position.y) + (building.position.x - i.position.x) * (building.position.x - i.position.x));
                 if (checkDistance < cafedistance) {
                     cafedistance = checkDistance;
                 }
             }
-
-
-
 
 
         }
@@ -121,27 +114,27 @@ public class SatisfactionMeter {
                 distanceScore = 20;
             }
 
-            counter += (int) distanceScore*10;
+            counter += (int) distanceScore * 10;
         }
 
         //Calculate the score for the other buildings
-        if(cafedistance<15){
-            counter+=55;
+        if (cafedistance < 15) {
+            counter += 55;
         }
 
-        if(restaurantdistance<15){
-            counter+=105;
+        if (restaurantdistance < 15) {
+            counter += 105;
         }
 
-        if(relaxationdistance<15){
-            counter+=85;
+        if (relaxationdistance < 15) {
+            counter += 85;
         }
 
         //Assessment 2
         //Give bonus score if an accomodation is placed next to all other buildings
-        if(relaxationdistance<15 && restaurantdistance<15 && cafedistance<15 && studydistance<20){
+        if (relaxationdistance < 15 && restaurantdistance < 15 && cafedistance < 15 && studydistance < 20) {
 
-            counter+=300;
+            counter += 300;
 
         }
 
@@ -151,14 +144,15 @@ public class SatisfactionMeter {
 
     }
 
-    /**Assessment 2
+    /**
+     * Assessment 2
      * Calculates the overcrowding penalty for having too many students  at 1 study area
      *
      * @param building The study building for which penalty is being calculated.
-     * @param list A list of all buildings on the map.
+     * @param list     A list of all buildings on the map.
      */
     private static void StudySatisfaction(Building building, List<Building> list) {
-        int accommodationCounter =0;
+        int accommodationCounter = 0;
         int counter = 1;
         float distance = 1000;
 
@@ -179,22 +173,15 @@ public class SatisfactionMeter {
         }
 
 
-
-
-
-
-        int checkvalue = 3200 - (accommodationCounter*640);
-        if (checkvalue<0){
+        int checkvalue = 3200 - (accommodationCounter * 640);
+        if (checkvalue < 0) {
 
             decreaseSatisfactionScore(Math.abs(checkvalue));
-        }
-        else{
+        } else {
 
             increaseSatisfactionScore(1);
 
         }
-
-
 
 
     }

@@ -11,7 +11,9 @@ import CampusTycoon.UI.StartScreen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
+/**
+ * {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms.
+ */
 public class CampusTycoon extends Game {
 
     public static InputMultiplexer multiplexer;
@@ -31,21 +33,20 @@ public class CampusTycoon extends Game {
         CampusTycoon.multiplexer.addProcessor(new InputHandler());
 
 
-
-
-
         Gdx.input.setInputProcessor(CampusTycoon.multiplexer);
 
-		// Sets the screen to the Main Menu
+        // Sets the screen to the Main Menu
 
-		Screen screen = new StartScreen();
-		ScreenUtils.currentScreen = screen;
-		setScreen(screen);
-	}
+        Screen screen = new StartScreen();
+        ScreenUtils.currentScreen = screen;
+        setScreen(screen);
+    }
 
-	@Override
-	public void render () {
-		if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
-		if (ScreenUtils.currentScreen != screen) { setScreen(ScreenUtils.currentScreen); }
-	}
+    @Override
+    public void render() {
+        if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
+        if (ScreenUtils.currentScreen != screen) {
+            setScreen(ScreenUtils.currentScreen);
+        }
+    }
 }

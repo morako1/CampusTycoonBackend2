@@ -7,26 +7,24 @@ import java.io.*;
 import java.util.*;
 
 
-
-
 public class Leaderboard {
 
-    public static Map<String,Integer> leaderboardmap;
+    public static Map<String, Integer> leaderboardmap;
 
 
     /**
-     *
      * Assessment 2
-     *
+     * <p>
      * Converts a string into a Map<String, Integer>
      * The input string should be in the format "{key1=value1, key2=value2, etc.}"
      * This is done as we can only save with primitive data types
+     *
      * @param input the string representation of the nao
      * @return a Map<String, Integer> containing the parsed key-value pairs
      */
-    public static Map<String,Integer> StringToMap(String input){
+    public static Map<String, Integer> StringToMap(String input) {
 
-        if(input.isEmpty()){
+        if (input.isEmpty()) {
             return new HashMap<>();
 
         }
@@ -51,16 +49,15 @@ public class Leaderboard {
         }
 
 
-        return  map;
-        }
+        return map;
+    }
 
 
     /**
-     *
      * Assessment 2
-     *
+     * <p>
      * Loads the leaderboard data from storage into the game.
-     *
+     * <p>
      * leaderboard data in the
      * preferences file, is converted into a map of player names and scores,
      * and assigned to the `leaderboardmap` field. The saved data is stored and
@@ -71,9 +68,9 @@ public class Leaderboard {
     public static void loadLeaderboard() throws IOException {
 
         Preferences prefs = Gdx.app.getPreferences("scores");
-        String leaderboardString = prefs.getString("scores","");
-        System.out.println(leaderboardString+"Saved");
-        leaderboardmap =StringToMap(leaderboardString);
+        String leaderboardString = prefs.getString("scores", "");
+        System.out.println(leaderboardString + "Saved");
+        leaderboardmap = StringToMap(leaderboardString);
 
 
     }
@@ -86,7 +83,7 @@ public class Leaderboard {
         //Sort the entries by score in descending order
         sortedEntries.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
-        prefs.putString("scores",sortedEntries.toString());
+        prefs.putString("scores", sortedEntries.toString());
 
         prefs.flush();
 
@@ -94,7 +91,7 @@ public class Leaderboard {
 
     //Display the leaderboard in a readable format
     public static String displayLeaderboard() {
-        String output="";
+        String output = "";
 
         // Sort the entries by score in descending order
         List<Map.Entry<String, Integer>> sortedEntries = leaderboardmap.entrySet().stream()
@@ -104,7 +101,7 @@ public class Leaderboard {
         // Display each entry with its ranking
         int rank = 1;
         for (Map.Entry<String, Integer> entry : sortedEntries) {
-            output+=(rank + ". " + entry.getKey() + ": " + entry.getValue()+"\n");
+            output += (rank + ". " + entry.getKey() + ": " + entry.getValue() + "\n");
             //System.out.println(rank + ". " + entry.getKey() + ": " + entry.getValue());
             rank++;
         }
@@ -114,7 +111,7 @@ public class Leaderboard {
 
     /**
      * Assessment 2
-     *
+     * <p>
      * Updates the score of a player in the leaderboard.
      * If the player already exists and their new score is higher than the currently saved score,
      * the score is updated. If the player does not exist, they are added with the specified score.
@@ -122,23 +119,21 @@ public class Leaderboard {
      * @param player   the name of the player whose score is being updated
      * @param newScore the new score to be potentially added or updated for the player
      */
-    public static void updateScore( String player, int newScore) {
+    public static void updateScore(String player, int newScore) {
 
-        if (leaderboardmap.containsKey(player)){
+        if (leaderboardmap.containsKey(player)) {
             int currentScore = leaderboardmap.get(player);
-            if(newScore > currentScore){
+            if (newScore > currentScore) {
                 //if score is greater than previous score
                 leaderboardmap.put(player, newScore);
-            }
-            else{
+            } else {
                 //if  score is less than previous score
-                leaderboardmap.put(player,currentScore);
+                leaderboardmap.put(player, currentScore);
             }
 
-        }
-        else{
+        } else {
 
-            leaderboardmap.put(player,newScore);
+            leaderboardmap.put(player, newScore);
 
         }
 

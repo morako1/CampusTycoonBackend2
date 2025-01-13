@@ -12,11 +12,12 @@ import com.badlogic.gdx.Gdx;
 
 
 import java.util.*;
+
 import static CampusTycoon.GameLogic.SatisfactionMeter.getSatisfactionScore;
 import static CampusTycoon.GameLogic.SatisfactionMeter.resetSatisfactionScore;
 
-public class Timer{
-	public static MenuText text;
+public class Timer {
+    public static MenuText text;
     private static float timeRemaining;
     public static boolean isRunning;
     public static boolean popUp;
@@ -54,7 +55,7 @@ public class Timer{
     public void start() {
 
         Random random = new Random();
-        nextEvent = 300f -(random.nextInt((61))+20);
+        nextEvent = 300f - (random.nextInt((61)) + 20);
         BuildingCounter.reset();
         SatisfactionMeter.resetSatisfactionScore();
         Money.resetMoney();
@@ -75,10 +76,14 @@ public class Timer{
 
     }
 
-    public static void resume() { isRunning = true; }
+    public static void resume() {
+        isRunning = true;
+    }
 
-    /**Assessmet 2
+    /**
+     * Assessmet 2
      * Sets the timer to the time specified
+     *
      * @param startTime the time to set the timer to
      */
     public void reset(float startTime) {
@@ -96,25 +101,24 @@ public class Timer{
                 onTimeUp(); // Call onTimeUp to handle end logic
             }
 
-            if(nextEvent>0& !eventQueue.isEmpty()){
+            if (nextEvent > 0 & !eventQueue.isEmpty()) {
 
 
-                if(timeRemaining<=nextEvent){
+                if (timeRemaining <= nextEvent) {
                     CallEvent();
                 }
 
 
-            }
-            else if (eventResult>0&!eventQueue.isEmpty()) {
-                if(timeRemaining<=eventResult){
+            } else if (eventResult > 0 & !eventQueue.isEmpty()) {
+                if (timeRemaining <= eventResult) {
                     CallEventResult();
                 }
             }
 
             if (text != null) {
-				text.text = "Time: " + String.valueOf(timeRemaining).split("\\.")[0];
-				text.update();
-			}
+                text.text = "Time: " + String.valueOf(timeRemaining).split("\\.")[0];
+                text.update();
+            }
         }
     }
 
@@ -122,26 +126,25 @@ public class Timer{
     /**
      * Assessment2
      * Processes the next event in the event queue and
-     *
+     * <p>
      * If the event queue is empty, the method returns
      * - STRIKE: Creates and assigns a new instance of StrikeEvent to the current event.
      * - DONATE: Creates and assigns a new instance of DonateEvent to the current event.
      * - CAT: Creates and assigns a new instance of CatEvent to the current event.
      */
-    public void CallEvent(){
+    public void CallEvent() {
         nextEvent = -1;
 
-        if(eventQueue.isEmpty()){
+        if (eventQueue.isEmpty()) {
 
             return;
         }
 
-        switch(eventQueue.get(0)){
-            case STRIKE -> GameUtils.currentEvent= new StrikeEvent();
-            case DONATE -> GameUtils.currentEvent= new DonateEvent();
-            case CAT -> GameUtils.currentEvent= new CatEvent();
+        switch (eventQueue.get(0)) {
+            case STRIKE -> GameUtils.currentEvent = new StrikeEvent();
+            case DONATE -> GameUtils.currentEvent = new DonateEvent();
+            case CAT -> GameUtils.currentEvent = new CatEvent();
         }
-
 
 
     }
@@ -150,10 +153,10 @@ public class Timer{
      * Assessment2
      * Displays the results of the event after some seconds
      */
-    public void CallEventResult(){
+    public void CallEventResult() {
         eventResult = -1;
 
-        if(eventQueue.isEmpty()){
+        if (eventQueue.isEmpty()) {
 
             return;
         }
@@ -171,7 +174,8 @@ public class Timer{
         return hasEnded;
     }
 
-    /** Assessment 2
+    /**
+     * Assessment 2
      * Called when time is up
      */
     private void onTimeUp() {
@@ -187,7 +191,7 @@ public class Timer{
         }
     }
 
-    public static int getFinalScore(){
+    public static int getFinalScore() {
         return score;
     }
 }
