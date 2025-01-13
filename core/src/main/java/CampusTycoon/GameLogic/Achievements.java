@@ -4,7 +4,11 @@ import CampusTycoon.GameLogic.Buildings.*;
 
 public class Achievements {
 
-
+    /**
+     * Assessment 2
+     * Determines and returns a string containing the achievements the player obtained
+     * @return A string that lists all achievements earned
+     */
     public static String GetAchievements(){
         int cafe;
         int restaurant;

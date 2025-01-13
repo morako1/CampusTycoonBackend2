@@ -2,6 +2,7 @@ package CampusTycoon.GameLogic;
 
 import CampusTycoon.UI.Component;
 
+
 public class Money {
 
 

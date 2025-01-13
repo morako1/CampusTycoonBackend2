@@ -18,22 +18,25 @@ public class SatisfactionMeter {
 
     /**
      * Assessment 2
-     * Calculate the satisfaction scor
+     * Called any time a building is placed
+     * It calculates the satisfaction score
      */
     public static void calculateSatisfaction() {
         resetSatisfactionScore();
 
+        //(Assessment 2)Iterates through all the buildings on the map
         for (Building i : GameUtils.map.buildings) {
 
             if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.AccommodationBuilding).getClass())) {
 
-
+                //(Assessment 2) For every accommodation building call this function
                 accommodationSatisfaction(i, GameUtils.map.buildings);
 
 
             }
 
 
+            //(Assessment 2) For every study building call this function
             if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.StudyBuilding).getClass())) {
 
 
@@ -49,9 +52,12 @@ public class SatisfactionMeter {
 
     /**
      * Assessment 2
-     * Calculates how much satisfaction score the accomodation building adds
+     * Calculates satisfaction score for accommodation building type based on the proximity of other buildings
+     * (study buildings, restaurants, relaxation areas, and cafeterias).
      *
-     * @param building the building the calculate the score for
+     *
+     * @param building The building for which satisfaction is calculated for.
+     * @param list A list of all buildings on the map.
      */
     private static void accommodationSatisfaction(Building building, List<Building> list) {
         int counter = 5;
@@ -61,24 +67,16 @@ public class SatisfactionMeter {
         float cafedistance = 1000;
 
         for (Building i : list) {
-
-
-
-
-            //Iterate through buildings to find closest study building
+            //Assessment 2
+            //This function goes through all the buildings types and finds the closest one to the accommodation
+            //Building we are calculating the satisfaction for
             if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.StudyBuilding).getClass())) {
 
                 float checkDistance = (float) Math.sqrt((building.position.y - i.position.y) * (building.position.y - i.position.y) + (building.position.x - i.position.x) * (building.position.x - i.position.x));
 
                 if (checkDistance < studydistance) {
                     studydistance = checkDistance;
-
-
-
                 }
-
-
-
             }
             else if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.RestaurantBuilding).getClass())) {
 
@@ -88,34 +86,21 @@ public class SatisfactionMeter {
                     restaurantdistance = checkDistance;
 
 
-
                 }
 
             }
             else if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.RelaxationBuilding).getClass())) {
 
                 float checkDistance = (float) Math.sqrt((building.position.y - i.position.y) * (building.position.y - i.position.y) + (building.position.x - i.position.x) * (building.position.x - i.position.x));
-
                 if (checkDistance < relaxationdistance) {
                     relaxationdistance = checkDistance;
-
-
-
                 }
-
             }
-
             else if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.CafeteriaBuilding).getClass())) {
-
                 float checkDistance = (float) Math.sqrt((building.position.y - i.position.y) * (building.position.y - i.position.y) + (building.position.x - i.position.x) * (building.position.x - i.position.x));
-
                 if (checkDistance < cafedistance) {
                     cafedistance = checkDistance;
-
-
-
                 }
-
             }
 
 
@@ -124,8 +109,9 @@ public class SatisfactionMeter {
 
         }
 
-
-        //There is no study area within 30
+        //Assessment 2
+        //There is no study area within 30 then dont give any extra satisfaction score
+        //If there is, calculate the satisfaction score depending on how close it is to the acccomodation
         if (studydistance >= 30d) {
 
 
@@ -138,6 +124,7 @@ public class SatisfactionMeter {
             counter += (int) distanceScore*10;
         }
 
+        //Calculate the score for the other buildings
         if(cafedistance<15){
             counter+=55;
         }
@@ -150,6 +137,8 @@ public class SatisfactionMeter {
             counter+=85;
         }
 
+        //Assessment 2
+        //Give bonus score if an accomodation is placed next to all other buildings
         if(relaxationdistance<15 && restaurantdistance<15 && cafedistance<15 && studydistance<20){
 
             counter+=300;
@@ -161,6 +150,13 @@ public class SatisfactionMeter {
 
 
     }
+
+    /**Assessment 2
+     * Calculates the overcrowding penalty for having too many students  at 1 study area
+     *
+     * @param building The study building for which penalty is being calculated.
+     * @param list A list of all buildings on the map.
+     */
     private static void StudySatisfaction(Building building, List<Building> list) {
         int accommodationCounter =0;
         int counter = 1;
@@ -169,8 +165,7 @@ public class SatisfactionMeter {
         for (Building i : list) {
 
 
-
-
+            //Assessment 2
             //Iterate through buildings to find out how many accommodations are close
             if (i.getClass().equals(MapUtils.getBuilding(MapUtils.Placement.AccommodationBuilding).getClass())) {
 

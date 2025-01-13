@@ -18,12 +18,11 @@ public class CampusTycoon extends Game {
 
     @Override
     public void create() {
-		//Gdx.graphics.setForegroundFPS(60); // Useful function for settings menu later
-        //Gdx.graphics.setContinuousRendering(false); // Interesting function to explore later
-        //(^if rendering performance becomes an issue)
-        System.out.println("Back to menu");
+
         Gdx.graphics.setTitle("Campus Tycoon");
 
+        //Assessment 2
+        //Using a multiplexer to allow text input to work
         multiplexer = new InputMultiplexer();
         saveScreen.stage = new Stage(new ScreenViewport());
 

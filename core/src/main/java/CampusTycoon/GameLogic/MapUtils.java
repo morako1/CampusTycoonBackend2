@@ -65,6 +65,7 @@ public class MapUtils {
 
 
 		}
+        //Assessment 2
 		// Checks if the position of the new building would overlap with water or
 		// mountains
 		String aUnique = York.RawMap;
@@ -87,6 +88,14 @@ public class MapUtils {
 	}
 
 
+    /**
+     * Assessment 2
+     * Determines if the player can afford to build a building based on its cost.
+     * If the player has enough money then the cost is subtracted from the available funds.
+     *
+     * @param cost The cost of the building to be constructed.
+     * @return true if the player can afford the building, otherwise false.
+     */
     public boolean canAffordBuilding(int cost){
 
 

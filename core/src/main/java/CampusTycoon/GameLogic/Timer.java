@@ -28,9 +28,18 @@ public class Timer{
     public static int score;
 
 
+    /**
+     * Assessment 2
+     * Constructs a new Timer object.
+     * Initializes the timer with the provided starting time, prepares the event queue
+     * by randomizing the enumerated events from the EventsEnum, and sets the initial
+     * states for the timer.
+     *
+     * @param startTime The initial time in seconds for the countdown timer.
+     */
     public Timer(float startTime) {
 
-      
+
         eventQueue = new ArrayList<EventsEnum>();
 
         eventQueue.addAll(Arrays.asList(EventsEnum.values()));
@@ -68,6 +77,10 @@ public class Timer{
 
     public static void resume() { isRunning = true; }
 
+    /**Assessmet 2
+     * Sets the timer to the time specified
+     * @param startTime the time to set the timer to
+     */
     public void reset(float startTime) {
         this.timeRemaining = startTime;
         this.isRunning = false;
@@ -106,6 +119,15 @@ public class Timer{
     }
 
 
+    /**
+     * Assessment2
+     * Processes the next event in the event queue and
+     *
+     * If the event queue is empty, the method returns
+     * - STRIKE: Creates and assigns a new instance of StrikeEvent to the current event.
+     * - DONATE: Creates and assigns a new instance of DonateEvent to the current event.
+     * - CAT: Creates and assigns a new instance of CatEvent to the current event.
+     */
     public void CallEvent(){
         nextEvent = -1;
 
@@ -124,6 +146,10 @@ public class Timer{
 
     }
 
+    /**
+     * Assessment2
+     * Displays the results of the event after some seconds
+     */
     public void CallEventResult(){
         eventResult = -1;
 
@@ -145,6 +171,9 @@ public class Timer{
         return hasEnded;
     }
 
+    /** Assessment 2
+     * Called when time is up
+     */
     private void onTimeUp() {
         if (!hasEnded) { // Check if already ended to avoid repeating
             hasEnded = true;

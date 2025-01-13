@@ -7,15 +7,23 @@ import java.io.*;
 import java.util.*;
 
 
-//Couldn't work out how to get a text file to willingly connect so here is the leaderboard hashmap generator and update functions.
-//Once I have worked out why I can't read and write to a text file this all works fine.
-//Also need to implement a text field in the save score area have not looked into that just yet.
+
 
 public class Leaderboard {
 
     public static Map<String,Integer> leaderboardmap;
 
 
+    /**
+     *
+     * Assessment 2
+     *
+     * Converts a string into a Map<String, Integer>
+     * The input string should be in the format "{key1=value1, key2=value2, etc.}"
+     * This is done as we can only save with primitive data types
+     * @param input the string representation of the nao
+     * @return a Map<String, Integer> containing the parsed key-value pairs
+     */
     public static Map<String,Integer> StringToMap(String input){
 
         if(input.isEmpty()){
@@ -47,8 +55,19 @@ public class Leaderboard {
         }
 
 
-
-    // Load the leaderboard from the file
+    /**
+     *
+     * Assessment 2
+     *
+     * Loads the leaderboard data from storage into the game.
+     *
+     * leaderboard data in the
+     * preferences file, is converted into a map of player names and scores,
+     * and assigned to the `leaderboardmap` field. The saved data is stored and
+     * retrieved using the name "scores".
+     *
+     * @throws IOException if an error occurs during the loading process.
+     */
     public static void loadLeaderboard() throws IOException {
 
         Preferences prefs = Gdx.app.getPreferences("scores");
@@ -93,7 +112,16 @@ public class Leaderboard {
     }
 
 
-    // Update a player's score (or add a new player if they are new)
+    /**
+     * Assessment 2
+     *
+     * Updates the score of a player in the leaderboard.
+     * If the player already exists and their new score is higher than the currently saved score,
+     * the score is updated. If the player does not exist, they are added with the specified score.
+     *
+     * @param player   the name of the player whose score is being updated
+     * @param newScore the new score to be potentially added or updated for the player
+     */
     public static void updateScore( String player, int newScore) {
 
         if (leaderboardmap.containsKey(player)){

@@ -272,17 +272,13 @@ public class GameUtils{
         // click on it for some reason)
     }
 
-//    public static void pauseModeUI(){
-//        Button resumeGame = new Button("Play.png", 100, 0, 80, 80);
-//        resumeGame.setClickAction(Actions.Resume);
-//        resumeGame.setAnchor(Anchor.TopLeft);
-//        Drawer.add(1, resumeGame);
-//    }
 
-
-
-
-    //(Assessment 2) This will tell the user the effects of their choice
+    /**
+     * Assessment 2
+     *
+     * Displays the result popup for an event in the game. This method is responsible
+     * for rendering a popup that tells the user the outcome of the event
+    */
     public static void EventResultPopup(){
         Timer.popUp=true;
         Timer.isRunning = false;
@@ -325,7 +321,15 @@ public class GameUtils{
 
     }
 
-
+    /**
+     * Assessment 2
+     *
+     * Creates a popup UI for displaying random events in game
+     * Generates 2 buttons to give the user a choice on how they want to react
+     *
+     * @param event The event for which the popup UI is being created. This object
+     *              provides the text for the ui
+     */
     public static void createEventPopupUI(Event event) {
         Backdrop eventScreenBackdrop = new Backdrop("Backdrop.png", 0, 30, 400, 350);
         eventScreenBackdrop.setAnchor(Anchor.Centre);
@@ -374,9 +378,17 @@ public class GameUtils{
         Drawer.add(2, testText);
     }
 
+    /**
+     * Assessment 2
+     *
+     * Creates the end screen user interface for the game.
+     *
+     */
     public static void createEndScreenUI() {
 
 
+        //Assessment 2
+        //Generate UI
         MenuText achievementsTitle = new MenuText("Achievements Achieved:",240,240,2f,2f);
 
         achievementsTitle.setAnchor(Anchor.Centre);
@@ -419,6 +431,14 @@ public class GameUtils{
         // (Allows buttons to be clicked and things to actually happen)
         InputHandler.add(endScreenButtonList);
     }
+
+    /**
+     *
+     * Assessment 2
+     *
+     * Displays the leaderboard user interface.
+     * Gets the leaderboard data from the leaderboard class
+     */
     public static void leaderboardUI() {
         Button buttonMainMenu = new Button("Main Menu.png", 0, -300, 262, 66);
         buttonMainMenu.setClickAction(Actions.OpenStartScreen);
@@ -467,14 +487,6 @@ public class GameUtils{
         InputHandler.add(endScreenButtonList);
     }
 
-    public static void createSaveScreenUI() {
-
-
-
-
-
-
-    }
 
 
 

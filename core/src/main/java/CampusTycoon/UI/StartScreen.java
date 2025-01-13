@@ -34,13 +34,7 @@ public class StartScreen implements Screen{
         }
 
         public void loadLeaderboard() throws IOException {
-
             Leaderboard.loadLeaderboard();
-
-
-
-
-
         }
 
 
